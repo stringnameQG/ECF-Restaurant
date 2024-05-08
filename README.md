@@ -1,2 +1,0 @@
-# ECF-Restaurant
-ECF-Restaurant
