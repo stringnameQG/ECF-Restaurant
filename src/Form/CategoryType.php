@@ -8,13 +8,21 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
+            ->add('title', TextType::class, [
+                'attr' => [
+                    'class' => 'input__title',
+                    'maxlength' => '100'
+                ],
+                'required' => true,
+                'label' => 'Titre'
+            ])
             ->add('menus', EntityType::class, [
                 'class' => Menu::class,
                 'choice_label' => 'id',

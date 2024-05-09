@@ -35,6 +35,14 @@ class Day
     #[Assert\NotNull(message: 'l\'heure ne peut pas être vide')]
     private ?\DateTimeInterface $closePM = null;
 
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le nom ne peut pas être vide')]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: 'Impossible de dépasser les 50 caractéres'
+    )]
+    private ?string $name = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +104,18 @@ class Day
     public function setClosePM(\DateTimeInterface $closePM): static
     {
         $this->closePM = $closePM;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
