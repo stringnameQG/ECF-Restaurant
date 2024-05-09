@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CateringService{% endblock %}
+
+{% block body %}
+    <h1>Create new CateringService</h1>
+
+    {{ include('catering_service/_form.html.twig') }}
+
+    <a href="{{ path('app_catering_service_index') }}">back to list</a>
+{% endblock %}

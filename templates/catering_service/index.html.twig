@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CateringService index{% endblock %}
+
+{% block body %}
+    <h1>CateringService index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumberOfGuests</th>
+                <th>DateOpen</th>
+                <th>DateClose</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for catering_service in catering_services %}
+            <tr>
+                <td>{{ catering_service.id }}</td>
+                <td>{{ catering_service.numberOfGuests }}</td>
+                <td>{{ catering_service.dateOpen ? catering_service.dateOpen|date('Y-m-d') : '' }}</td>
+                <td>{{ catering_service.dateClose ? catering_service.dateClose|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_catering_service_show', {'id': catering_service.id}) }}">show</a>
+                    <a href="{{ path('app_catering_service_edit', {'id': catering_service.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_catering_service_new') }}">Create new</a>
+{% endblock %}

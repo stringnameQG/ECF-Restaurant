@@ -6,6 +6,7 @@ use App\Repository\MenuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
 class Menu
@@ -16,9 +17,15 @@ class Menu
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Le titre ne peut pas être vide')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Impossible de dépasser les 100 caractéres'
+    )]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'Le menu doit être définit sur inactif ou actif')]
     private ?bool $active = null;
 
     /**

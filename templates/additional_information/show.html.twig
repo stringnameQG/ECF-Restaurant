@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdditionalInformation{% endblock %}
+
+{% block body %}
+    <h1>AdditionalInformation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ additional_information.id }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfGuests</th>
+                <td>{{ additional_information.numberOfGuests }}</td>
+            </tr>
+            <tr>
+                <th>DefaultName</th>
+                <td>{{ additional_information.defaultName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_additional_information_index') }}">back to list</a>
+
+    <a href="{{ path('app_additional_information_edit', {'id': additional_information.id}) }}">edit</a>
+
+    {{ include('additional_information/_delete_form.html.twig') }}
+{% endblock %}

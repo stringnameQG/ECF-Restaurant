@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -19,6 +20,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: 'L\'email ne peut pas être vide')]
+    #[Assert\Length(
+        max: 180,
+        maxMessage: 'Impossible de dépasser les 180 caractéres'
+    )]
     private ?string $email = null;
 
     /**
@@ -32,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?AdditionalInformation $AdditionalInformation = null;
 
     public function getId(): ?int
     {
@@ -106,5 +115,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getAdditionalInformation(): ?AdditionalInformation
+    {
+        return $this->AdditionalInformation;
+    }
+
+    public function setAdditionalInformation(?AdditionalInformation $AdditionalInformation): static
+    {
+        $this->AdditionalInformation = $AdditionalInformation;
+
+        return $this;
     }
 }

@@ -6,6 +6,7 @@ use App\Repository\AllergyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AllergyRepository::class)]
 class Allergy
@@ -16,6 +17,11 @@ class Allergy
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le nom de l\'allergie ne peut pas être vide')]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: 'Impossible de dépasser les 50 caractéres'
+    )]
     private ?string $name = null;
 
     /**

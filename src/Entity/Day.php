@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DayRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DayRepository::class)]
 class Day
@@ -15,18 +16,23 @@ class Day
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'l\'activation ne peut pas être vide')]
     private ?bool $active = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotNull(message: 'l\'heure ne peut pas être vide')]
     private ?\DateTimeInterface $openAM = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotNull(message: 'l\'heure ne peut pas être vide')]
     private ?\DateTimeInterface $closeAM = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotNull(message: 'l\'heure ne peut pas être vide')]
     private ?\DateTimeInterface $openPM = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotNull(message: 'l\'heure ne peut pas être vide')]
     private ?\DateTimeInterface $closePM = null;
 
     public function getId(): ?int

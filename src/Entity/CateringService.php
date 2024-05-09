@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CateringServiceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CateringServiceRepository::class)]
 class CateringService
@@ -15,6 +16,7 @@ class CateringService
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero(message: 'Le nombre de personnes ne peut pas être vide ou inférieur à zéro')]
     private ?int $numberOfGuests = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

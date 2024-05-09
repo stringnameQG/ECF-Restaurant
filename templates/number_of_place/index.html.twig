@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NumberOfPlace index{% endblock %}
+
+{% block body %}
+    <h1>NumberOfPlace index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumberOfPlace</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for number_of_place in number_of_places %}
+            <tr>
+                <td>{{ number_of_place.id }}</td>
+                <td>{{ number_of_place.numberOfPlace }}</td>
+                <td>
+                    <a href="{{ path('app_number_of_place_show', {'id': number_of_place.id}) }}">show</a>
+                    <a href="{{ path('app_number_of_place_edit', {'id': number_of_place.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_number_of_place_new') }}">Create new</a>
+{% endblock %}
