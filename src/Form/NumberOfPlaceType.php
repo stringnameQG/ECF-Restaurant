@@ -19,7 +19,7 @@ class NumberOfPlaceType extends AbstractType
                     'min' => '0'
                 ],
                 'required' => true,
-                'label' => 'Note'
+                'label' => 'Nombre de place'
             ])
         ;
     }

@@ -6,7 +6,7 @@ use App\Entity\Day;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -27,7 +27,7 @@ class DayType extends AbstractType
                 'label' => 'Jour',
                 'required' => true
             ])
-            ->add('openAM', DateType::class, [
+            ->add('openAM', TimeType::class, [
                 'attr' => [
                     'class' => 'input__openAM'
                 ],
@@ -35,7 +35,7 @@ class DayType extends AbstractType
                 'required' => true,
                 'widget' => 'single_text',
             ])
-            ->add('closeAM', DateType::class, [
+            ->add('closeAM', TimeType::class, [
                 'attr' => [
                     'class' => 'input__closeAM'
                 ],
@@ -43,7 +43,7 @@ class DayType extends AbstractType
                 'required' => true,
                 'widget' => 'single_text',
             ])
-            ->add('openPM', DateType::class, [
+            ->add('openPM', TimeType::class, [
                 'attr' => [
                     'class' => 'input__openPM'
                 ],
@@ -51,7 +51,7 @@ class DayType extends AbstractType
                 'required' => true,
                 'widget' => 'single_text',
             ])
-            ->add('closePM', DateType::class, [
+            ->add('closePM', TimeType::class, [
                 'attr' => [
                     'class' => 'input__closePM'
                 ],

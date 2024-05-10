@@ -23,11 +23,6 @@ class CategoryType extends AbstractType
                 'required' => true,
                 'label' => 'Titre'
             ])
-            ->add('menus', EntityType::class, [
-                'class' => Menu::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
         ;
     }
 

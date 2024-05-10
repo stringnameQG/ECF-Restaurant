@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class DishesType extends AbstractType
@@ -24,7 +25,7 @@ class DishesType extends AbstractType
                     'maxlength' => '50'
                 ],
                 'required' => true,
-                'label' => 'Prénom'
+                'label' => 'Titre'
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [
@@ -33,24 +34,20 @@ class DishesType extends AbstractType
                     'maxlength' => '400'
                 ],
                 'required' => true,
-                'label' => 'Commentaire'
+                'label' => 'Description'
             ])
-            ->add('price', IntegerType::class, [
+            ->add('price', NumberType::class, [
                 'attr' => [
                     'class' => 'input__price',
                     'min' => '0'
                 ],
                 'required' => true,
-                'label' => 'Note'
+                'label' => 'Price'
             ])
-            ->add('bestDishes', CheckboxType::class, [
-                'class' => 'input__bestDishes',
-                'label'    => 'Ouvert',
-                'required' => true,
-            ])
+            ->add('bestDishes')
             ->add('Category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'title',
             ])
         ;
     }

@@ -21,12 +21,7 @@ class AllergyType extends AbstractType
                     'maxlength' => '100'
                 ],
                 'required' => true,
-                'label' => 'Nom réservation'
-            ])
-            ->add('bookings', EntityType::class, [
-                'class' => Booking::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+                'label' => 'Nom allergie'
             ])
         ;
     }
