@@ -15,10 +15,7 @@ class DayType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('active', CheckboxType::class, [
-                'label'    => 'Ouvert',
-                'required' => true,
-            ])
+            ->add('active')
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'input__name',

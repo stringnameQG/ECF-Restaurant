@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class FormulaType extends AbstractType
 {
@@ -24,18 +25,13 @@ class FormulaType extends AbstractType
                 'required' => true,
                 'label' => 'Nom'
             ])
-            ->add('price', IntegerType::class, [
+            ->add('price', NumberType::class, [
                 'attr' => [
                     'class' => 'input__price',
                     'min' => '0'
                 ],
                 'required' => true,
                 'label' => 'Prix'
-            ])
-            ->add('menus', EntityType::class, [
-                'class' => Menu::class,
-                'choice_label' => 'id',
-                'multiple' => true,
             ])
         ;
     }

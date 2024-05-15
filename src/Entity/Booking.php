@@ -21,7 +21,7 @@ class Booking
     #[Assert\PositiveOrZero(message: 'Le nombre de personne ne peut pas être vide ou inférieur à zéro')]
     private ?int $numberOfGuests = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message: 'L\'heure de réservation ne peut pas être vide')]
     private ?\DateTimeInterface $date = null;
 

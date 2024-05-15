@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -25,7 +26,7 @@ class BookingType extends AbstractType
                 'required' => true,
                 'label' => 'Nombre de personne'
             ])
-            ->add('date', DateType::class, [
+            ->add('date', DateTimeType::class, [
                 'attr' => [
                     'class' => 'input__date'
                 ],
@@ -43,8 +44,8 @@ class BookingType extends AbstractType
             ])
             ->add('Allergy', EntityType::class, [
                 'class' => Allergy::class,
-                'choice_label' => 'id',
-                'required' => true,
+                'choice_label' => 'name',
+                'required' => false,
                 'multiple' => true,
             ])
         ;

@@ -25,18 +25,15 @@ class MenuType extends AbstractType
                 'required' => true,
                 'label' => 'Titre'
             ])
-            ->add('active', CheckboxType::class, [
-                'label'    => 'Ouvert',
-                'required' => true,
-            ])
+            ->add('active')
             ->add('Category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'title',
                 'multiple' => true,
             ])
             ->add('Formula', EntityType::class, [
                 'class' => Formula::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
             ])
         ;

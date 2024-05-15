@@ -26,7 +26,7 @@ class Formula
 
     #[ORM\Column]
     #[Assert\PositiveOrZero(message: 'Le prix ne peut pas être vide ou inférieur à zéro')]
-    private ?int $price = null;
+    private ?float $price = null;
 
     /**
      * @var Collection<int, Menu>
@@ -56,12 +56,12 @@ class Formula
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): static
+    public function setPrice(float $price): static
     {
         $this->price = $price;
 

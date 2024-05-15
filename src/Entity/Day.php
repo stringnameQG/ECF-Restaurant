@@ -16,7 +16,6 @@ class Day
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\NotNull(message: 'l\'activation ne peut pas être vide')]
     private ?bool $active = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]

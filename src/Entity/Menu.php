@@ -25,7 +25,6 @@ class Menu
     private ?string $title = null;
 
     #[ORM\Column]
-    #[Assert\NotNull(message: 'Le menu doit être définit sur inactif ou actif')]
     private ?bool $active = null;
 
     /**

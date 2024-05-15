@@ -44,7 +44,10 @@ class DishesType extends AbstractType
                 'required' => true,
                 'label' => 'Price'
             ])
-            ->add('bestDishes')
+            ->add('bestDishes', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Plat favori'
+            ])
             ->add('Category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'title',
