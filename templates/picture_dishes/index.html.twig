@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+{% endblock javascripts %}
+
 {% block title %}PictureDishes index{% endblock %}
 
 {% block body %}
@@ -11,7 +15,9 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Name</th>
+                <th>Display</th>
                 <th>actions</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -20,9 +26,14 @@
                 <td>{{ picture_dish.id }}</td>
                 <td>{{ picture_dish.title }}</td>
                 <td>{{ picture_dish.name }}</td>
+                <td>{{ picture_dish.display ? 'Yes' : 'No'  }}</td>
                 <td>
                     <a href="{{ path('app_picture_dishes_show', {'id': picture_dish.id}) }}">show</a>
                     <a href="{{ path('app_picture_dishes_edit', {'id': picture_dish.id}) }}">edit</a>
+                </td>
+                <td>
+                    <a href="{{ path('app_picture_dishes_delete_image', {id: picture_dish.id}) }}" 
+                    data-delete data-token="{{ csrf_token('delete' ~ picture_dish.id) }}">Supprimer</a> 
                 </td>
             </tr>
         {% else %}

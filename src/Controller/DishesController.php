@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Dishes;
 use App\Form\DishesType;
 use App\Repository\DishesRepository;
+use App\Repository\PictureDishesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Mapping\Id;
+use App\Service\PictureService;
 
 #[Route('/dishes')]
 class DishesController extends AbstractController
@@ -21,9 +25,11 @@ class DishesController extends AbstractController
             'dishes' => $dishesRepository->findAll(),
         ]);
     }
-
     #[Route('/new', name: 'app_dishes_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager
+    ): Response
     {
         $dish = new Dishes();
         $form = $this->createForm(DishesType::class, $dish);
@@ -51,7 +57,11 @@ class DishesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_dishes_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Dishes $dish, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request, 
+        Dishes $dish, 
+        EntityManagerInterface $entityManager
+        ): Response
     {
         $form = $this->createForm(DishesType::class, $dish);
         $form->handleRequest($request);
@@ -69,9 +79,25 @@ class DishesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_dishes_delete', methods: ['POST'])]
-    public function delete(Request $request, Dishes $dish, EntityManagerInterface $entityManager): Response
+    public function delete(
+        Request $request, 
+        Dishes $dish, 
+        EntityManagerInterface $entityManager,
+        PictureDishesRepository $pictureDishesRepository,
+        PictureService $pictureService
+    ): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$dish->getId(), $request->getPayload()->get('_token'))) {
+        if($this->isCsrfTokenValid('delete'.$dish->getId(), $request->getPayload()->get('_token'))) {
+            
+            $dishId = $pictureDishesRepository->findPictureName($dish->getId());
+
+            var_dump($dishId);
+
+            foreach($dishId as &$value){
+                var_dump($value);
+                $pictureService->deleteImageCloudinary($value["name"]);
+            }
+            
             $entityManager->remove($dish);
             $entityManager->flush();
         }

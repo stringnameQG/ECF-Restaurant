@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
+use App\Service\Mailer;
+use App\Repository\UserRepository;
 use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
@@ -10,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('/booking')]
 class BookingController extends AbstractController
@@ -23,7 +29,11 @@ class BookingController extends AbstractController
     }
 
     #[Route('/new', name: 'app_booking_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager,
+        Mailer $mailer
+    ): Response
     {
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
@@ -33,12 +43,24 @@ class BookingController extends AbstractController
             $entityManager->persist($booking);
             $entityManager->flush();
 
+            if(!is_null($user = $this->getUser())){
+
+                $emailAdresse = $this->getUser()->getUserIdentifier();
+                $numberOfGuests = $form->get('numberOfGuests')->getData();
+                $resevationName = $form->get('name')->getData();
+                $dateReservation = $form->get('date')->getData()->format('Y-m-d H:i');
+
+                $mailer->ConfirmBooking($emailAdresse, $numberOfGuests, $resevationName, $dateReservation);
+            }
+
             return $this->redirectToRoute('app_booking_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $user = $this->getUser();
         return $this->render('booking/new.html.twig', [
             'booking' => $booking,
             'form' => $form,
+            'currentUser' => $user,
         ]);
     }
 

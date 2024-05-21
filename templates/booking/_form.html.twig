@@ -1,4 +1,48 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{% if currentUser is not defined or currentUser is null %}
+    <div>
+        {{ form_label(form.date) }} 
+        {{ form_widget(form.date) }} 
+    </div>
+    <div>
+        {{ form_label(form.numberOfGuests) }} 
+        {{ form_widget(form.numberOfGuests) }} 
+    </div>
+    <div>
+        {{ form_label(form.name) }} 
+        {{ form_widget(form.name) }} 
+    </div>
+    <div>
+        {{ form_label(form.Allergy) }} 
+        {{ form_widget(form.Allergy) }} 
+    </div>
+{% else %}
+    <div>
+        {{ form_label(form.date) }} 
+        {{ form_widget(form.date) }} 
+    </div>
+    <div>
+        {{ form_label(form.numberOfGuests) }} 
+        {{ form_widget(form.numberOfGuests, {'value' : currentUser.numberOfGuests}) }} 
+    </div>
+    <div>
+        {{ form_label(form.name) }} 
+        {{ form_widget(form.name, {'value' : currentUser.defaultName}) }} 
+    </div>
+    <select name="{{ field_name(form.Allergy) }}" multiple="multiple">
+        {% for label, value in field_choices(form.Allergy) %}
+            {% set trouver = false %}
+            {% for valueUser in currentUser.allergy %}
+                {% if trouver == false and valueUser.name == label %}
+                    <option value="{{ value }}" selected="selected">{{ label }}</option>
+                    {% set trouver = true %}
+                {% endif %}   
+            {% endfor %}
+            {% if trouver == false %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endif %}   
+        {% endfor %}
+    </select>
+{% endif %}
+    <button class="btn-enregistrer">{{ button_label|default('ENREGISTRER') }}</button>
 {{ form_end(form) }}

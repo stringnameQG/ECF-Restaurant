@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -39,8 +41,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?AdditionalInformation $AdditionalInformation = null;
+    #[ORM\Column]
+    #[Assert\GreaterThan(
+        value: 0,
+        message: 'Le nombre de personne par défaut ne peut pas être vide'
+    )]
+    #[Assert\NotBlank(message: 'Le nombre de personne par défaut ne peut pas être vide')]
+    private ?int $numberOfGuests = null;
+
+    #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Le nom par défaut ne peut pas être vide')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Impossible de dépasser les 100 caractéres'
+    )]
+    private ?string $defaultName = null;
+
+    /**
+     * @var Collection<int, Allergy>
+     */
+    #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'users')]
+    private Collection $allergy;
+
+    public function __construct()
+    {
+        $this->allergy = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,14 +143,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAdditionalInformation(): ?AdditionalInformation
+    public function getNumberOfGuests(): ?int
     {
-        return $this->AdditionalInformation;
+        return $this->numberOfGuests;
     }
 
-    public function setAdditionalInformation(?AdditionalInformation $AdditionalInformation): static
+    public function setNumberOfGuests(int $numberOfGuests): static
     {
-        $this->AdditionalInformation = $AdditionalInformation;
+        $this->numberOfGuests = $numberOfGuests;
+
+        return $this;
+    }
+
+    public function getDefaultName(): ?string
+    {
+        return $this->defaultName;
+    }
+
+    public function setDefaultName(string $defaultName): static
+    {
+        $this->defaultName = $defaultName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Allergy>
+     */
+    public function getAllergy(): Collection
+    {
+        return $this->allergy;
+    }
+
+    public function addAllergy(Allergy $allergy): static
+    {
+        if (!$this->allergy->contains($allergy)) {
+            $this->allergy->add($allergy);
+        }
+
+        return $this;
+    }
+
+    public function removeAllergy(Allergy $allergy): static
+    {
+        $this->allergy->removeElement($allergy);
 
         return $this;
     }

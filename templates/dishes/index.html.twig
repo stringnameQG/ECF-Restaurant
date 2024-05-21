@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+{% endblock javascripts %}
+
 {% block title %}Dishes index{% endblock %}
 
 {% block body %}
+    <script src="{{ asset('js/images.js') }}"></script>
     <h1>Dishes index</h1>
 
     <table class="table">
@@ -12,7 +17,6 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>BestDishes</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,7 +27,6 @@
                 <td>{{ dish.title }}</td>
                 <td>{{ dish.description }}</td>
                 <td>{{ dish.price }}</td>
-                <td>{{ dish.bestDishes ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_dishes_show', {'id': dish.id}) }}">show</a>
                     <a href="{{ path('app_dishes_edit', {'id': dish.id}) }}">edit</a>

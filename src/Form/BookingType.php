@@ -30,7 +30,6 @@ class BookingType extends AbstractType
                 'attr' => [
                     'class' => 'input__date'
                 ],
-                'label' => 'Date de réservation',
                 'required' => true,
                 'widget' => 'single_text',
             ])

@@ -16,6 +16,20 @@ class PictureDishesRepository extends ServiceEntityRepository
         parent::__construct($registry, PictureDishes::class);
     }
 
+    public function findPictureName(int $dishesId)  // : array
+    {
+        $requete = $this->createQueryBuilder('p')
+            ->select('p.name AS name')
+            ->andWhere('p.dishes = :dishesId')
+            ->setParameter('dishesId', $dishesId)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $requete;
+    }
+
     //    /**
     //     * @return PictureDishes[] Returns an array of PictureDishes objects
     //     */

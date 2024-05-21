@@ -37,13 +37,11 @@ class Dishes
     #[Assert\PositiveOrZero(message: 'Le prix ne peut pas être vide ou inférieur à zéro')]
     private ?float $price = null;
 
-    #[ORM\Column]
-    private ?bool $bestDishes = null;
 
     /**
      * @var Collection<int, PictureDishes>
      */
-    #[ORM\OneToMany(targetEntity: PictureDishes::class, mappedBy: 'dishes')]
+    #[ORM\OneToMany(mappedBy: 'dishes', targetEntity: PictureDishes::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $PictureDishes;
 
     #[ORM\ManyToOne(inversedBy: 'dishes')]
@@ -91,18 +89,6 @@ class Dishes
     public function setPrice(float $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function isBestDishes(): ?bool
-    {
-        return $this->bestDishes;
-    }
-
-    public function setBestDishes(bool $bestDishes): static
-    {
-        $this->bestDishes = $bestDishes;
 
         return $this;
     }

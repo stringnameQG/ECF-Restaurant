@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class DishesType extends AbstractType
 {
@@ -43,10 +43,6 @@ class DishesType extends AbstractType
                 ],
                 'required' => true,
                 'label' => 'Price'
-            ])
-            ->add('bestDishes', CheckboxType::class, [
-                'required' => false,
-                'label' => 'Plat favori'
             ])
             ->add('Category', EntityType::class, [
                 'class' => Category::class,

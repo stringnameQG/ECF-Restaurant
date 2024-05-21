@@ -6,10 +6,12 @@ use App\Entity\PictureDishes;
 use App\Form\PictureDishesType;
 use App\Repository\PictureDishesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PictureService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/picture/dishes')]
 class PictureDishesController extends AbstractController
@@ -23,14 +25,34 @@ class PictureDishesController extends AbstractController
     }
 
     #[Route('/new', name: 'app_picture_dishes_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager,
+        PictureService $pictureService
+    ): Response
     {
         $pictureDish = new PictureDishes();
         $form = $this->createForm(PictureDishesType::class, $pictureDish);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($pictureDish);
+
+            $pictures = $form->get('pictures')->getData();
+            $picturesTitle = $form->get('title')->getData();
+            $picturesDishes = $form->get('dishes')->getData();
+
+            foreach($pictures as $picture) {
+                
+                $fichier = $pictureService->add($picture);
+
+                $img = new PictureDishes();
+                $img->setTitle($picturesTitle);
+                $img->setName($fichier);
+                $img->setDishes($picturesDishes);
+
+            }
+            
+            $entityManager->persist($img);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_picture_dishes_index', [], Response::HTTP_SEE_OTHER);
@@ -51,12 +73,33 @@ class PictureDishesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_picture_dishes_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, PictureDishes $pictureDish, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, 
+    PictureDishes $pictureDish, 
+    EntityManagerInterface $entityManager,
+    PictureService $pictureService
+    ): Response
     {
+        $pictureDish = new PictureDishes();
         $form = $this->createForm(PictureDishesType::class, $pictureDish);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $pictures = $form->get('pictures')->getData();
+            $picturesTitle = $form->get('title')->getData();
+            $picturesDishes = $form->get('dishes')->getData();
+
+            // On boucle sur les images 
+            foreach($pictures as $picture) {
+                
+                $fichier = $pictureService->add($picture);
+
+                $img = new PictureDishes();
+                $img->setTitle($picturesTitle);
+                $img->setName($fichier);
+                $img->setDishes($picturesDishes);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_picture_dishes_index', [], Response::HTTP_SEE_OTHER);
@@ -77,5 +120,31 @@ class PictureDishesController extends AbstractController
         }
 
         return $this->redirectToRoute('app_picture_dishes_index', [], Response::HTTP_SEE_OTHER);
+    }
+    
+    #[Route('delete/{id}', name: 'app_picture_dishes_delete_image', methods: ['DELETE'])]
+    public function deleteImage(
+        PictureDishes $picture, 
+        Request $request, 
+        EntityManagerInterface $em,
+        PictureService $pictureService
+        ){
+            
+        $data = json_decode($request->getContent(), true);
+        
+        if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
+
+            $nom = $picture->getName();
+
+            $pictureService->deleteImageCloudinary($nom);
+
+            $em->remove($picture);
+            $em->flush();
+
+            return new JsonResponse(['success' => 1]);
+            
+        }else{
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
     }
 }

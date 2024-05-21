@@ -25,8 +25,11 @@ class PictureDishes
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'PictureDishes')]
+    #[ORM\ManyToOne(inversedBy: 'picture')]
     private ?Dishes $dishes = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $display = null;
 
     public function getId(): ?int
     {
@@ -65,6 +68,18 @@ class PictureDishes
     public function setDishes(?Dishes $dishes): static
     {
         $this->dishes = $dishes;
+
+        return $this;
+    }
+
+    public function isDisplay(): ?bool
+    {
+        return $this->display;
+    }
+
+    public function setDisplay(?bool $display): static
+    {
+        $this->display = $display;
 
         return $this;
     }
