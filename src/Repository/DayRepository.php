@@ -15,6 +15,30 @@ class DayRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Day::class);
     }
+    
+    public function findDayIfOpen(string $day): array
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d.active')
+            ->andWhere('d.name = :val')
+            ->setParameter('val', $day)
+            ->orderBy('d.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    public function findSchedules(string $day): array
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d.openAM, d.closeAM, d.openPM, d.closePM')
+            ->andWhere('d.name = :val')
+            ->setParameter('val', $day)
+            ->orderBy('d.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     //    /**
     //     * @return Day[] Returns an array of Day objects
