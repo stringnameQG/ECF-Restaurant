@@ -18,7 +18,7 @@ class MenuController extends AbstractController
     public function index(MenuRepository $menuRepository): Response
     {
         return $this->render('menu/index.html.twig', [
-            'menus' => $menuRepository->findAll(),
+            'menus' => $menuRepository->findAll()
         ]);
     }
 

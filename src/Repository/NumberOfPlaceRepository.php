@@ -15,6 +15,16 @@ class NumberOfPlaceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, NumberOfPlace::class);
     }
+    
+    public function findNumberOfPlace(): array
+    {
+        return $this->createQueryBuilder('n')
+            ->select('n.numberOfPlace')
+            ->orderBy('n.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     //    /**
     //     * @return NumberOfPlace[] Returns an array of NumberOfPlace objects

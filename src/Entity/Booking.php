@@ -19,6 +19,13 @@ class Booking
 
     #[ORM\Column]
     #[Assert\PositiveOrZero(message: 'Le nombre de personne ne peut pas être vide ou inférieur à zéro')]
+    /*
+    #[Assert\Range(
+        min: 1,
+        max: 20,
+        minMessage: 'Impossible de faire une réservation avec moin d\'une personne',
+        maxMessage: 'Impossible de faire une réservation avec plus de 20 personnes',
+    )]  */
     private ?int $numberOfGuests = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

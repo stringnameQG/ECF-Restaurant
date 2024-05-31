@@ -28,7 +28,7 @@ class PictureDishes
     #[ORM\ManyToOne(inversedBy: 'picture')]
     private ?Dishes $dishes = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]       //#[ORM\Column(nullable: true)]
     private ?bool $display = null;
 
     public function getId(): ?int

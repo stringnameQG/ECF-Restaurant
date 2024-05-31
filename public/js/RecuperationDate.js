@@ -4,31 +4,39 @@ window.onload = () => {
 }
 
 function ReservationDate(){
-    const DATESELECTINPAGE = document.querySelector('.input__date');
-    const DATESELECT = DATESELECTINPAGE.value;
-
-    DateIsNull(DATESELECT);
+    DeleteHoldSearch();
+    DateIsNull(UserDateSelect);
+    
+    function DeleteHoldSearch(){
+        const SELECTSCHEDULES = document.querySelector(".schedules").options.length=0;
+    }
 
     function DateIsNull(){
-        if(DATESELECT == null){
-            console.log("Aucune date renseigné");
+        if(UserDateSelect() == null){
+            AddOptionInSelectBalise("Aucune date renseigné", "");
         } else {
             DateComparisonToday();
         }
     }
+
+    function UserDateSelect(){
+        const DATESELECTINPAGE = document.querySelector('.input__date');
+        const DATESELECT = DATESELECTINPAGE.value;
+        return DATESELECT;
+    }
     
     function DateComparisonToday(){
-        const DATESELECTINMILISECOND = new Date(DATESELECT).getTime();
+        const DATESELECTINMILISECOND = new Date(UserDateSelect()).getTime();
         const CURRENTDATE = Date.now();
         if(DATESELECTINMILISECOND < CURRENTDATE){
-            console.log("date antérieur à aujourd'hui");
+            AddOptionInSelectBalise("date antérieur à aujourd'hui", "");
         } else {
-            FormToGetDayInFrench(ConvertDateInFrench());
+            VerifyDayIsOpen(ConvertDateInFrench());
         } 
     }
     
     function ConvertDateInFrench(){
-        const DAYNUMBER = new Date(DATESELECT).getDay();
+        const DAYNUMBER = new Date(UserDateSelect()).getDay();
         let dayInFrench;
 
         switch(DAYNUMBER){
@@ -59,134 +67,109 @@ function ReservationDate(){
         return dayInFrench;
     }
 
-    function FormToGetDayInFrench(dayInFrench){
-        const FORMDAY = {"dayInFrench" : dayInFrench};
-        DQLRequestDayIsOpen(FORMDAY);
+    function VerifyDayIsOpen(day){
+        const ARRAYSCHEDUELSJSON = sessionStorage.getItem("arraysSchedules");  
+        if(ARRAYSCHEDUELSJSON.includes(day)){
+            VerifySchedulesIsOpen(ARRAYSCHEDUELSJSON, day);
+        } else {
+            AddOptionInSelectBalise("Fermé", "");
+        }
     }
 
-    function DQLRequestDayIsOpen(FORMDAY){
+    function VerifySchedulesIsOpen(arraySchedulesJson, day){
+        const ARRAYSCHEDULES = JSON.parse(arraySchedulesJson);
+        let arraySchedulesOpen = {};
+
+        if(ARRAYSCHEDULES[day]["AM"] == "close"){
+            AddOptionInSelectBalise("fermé le matin", "");
+        } else {
+            const SCHEDULESAMARRAY = {"open" : ARRAYSCHEDULES[day]["AM"][0], "close" : ARRAYSCHEDULES[day]["AM"][ARRAYSCHEDULES[day]["AM"].length - 1]};
+            arraySchedulesOpen["AM"] = SCHEDULESAMARRAY;
+        }
+
+        if(ARRAYSCHEDULES[day]["PM"] == "close"){
+            AddOptionInSelectBalise("fermé le soir", "");
+        } else {
+            const SCHEDULESPMARRAY = {"open" : ARRAYSCHEDULES[day]["PM"][0], "close" : ARRAYSCHEDULES[day]["PM"][ARRAYSCHEDULES[day]["PM"].length - 1]};
+            arraySchedulesOpen["PM"] = SCHEDULESPMARRAY;
+        }
+
+        VerifyDayIsFull(RetrieveDate(arraySchedulesOpen));
+    }
+
+    function RetrieveDate(SCHEDULESARRAY){
+        const DATESELECT = UserDateSelect();
+
+        SCHEDULESARRAY["AM"]["open"] = DATESELECT.concat(" ", SCHEDULESARRAY["AM"]["open"]);
+        SCHEDULESARRAY["AM"]["close"] = DATESELECT.concat(" ", SCHEDULESARRAY["AM"]["close"]);
+
+        SCHEDULESARRAY["PM"]["open"] = DATESELECT.concat(" ", SCHEDULESARRAY["PM"]["open"]);
+        SCHEDULESARRAY["PM"]["close"] = DATESELECT.concat(" ", SCHEDULESARRAY["PM"]["close"]);
+
+        return SCHEDULESARRAY;
+    }
+
+    function VerifyDayIsFull(ARRAYSCHEDULESCONVERT){
+        const AMOPEN = DQLRequestDayIsFull(ARRAYSCHEDULESCONVERT["AM"]);
+        const PMOPEN = DQLRequestDayIsFull(ARRAYSCHEDULESCONVERT["PM"]);
+
+        RecreateArraySchedules(AMOPEN, PMOPEN);
+    }
+
+    function DQLRequestDayIsFull(SCHEDULESARRAY){
+        const NUMBEROFPLACE = JSON.parse(sessionStorage.getItem("numberOfPlace"));
+        SCHEDULESARRAY["numberOfPlace"] = NUMBEROFPLACE;
         $.ajax({
-            url: '/dayIsOpen',
+            url: '/dayFullSchedules',
             method: 'GET',
-            data: FORMDAY,
+            data: SCHEDULESARRAY,
             dataType: "json",
             timeout: 1500,
             success: function(data) {
-                VerifyDayIsOpen(data);
+                return data;
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function(jqXHR, textStatus, errorThrown){
                 console.log(textStatus, errorThrown, jqXHR);
             }
         });
     }
 
-    function VerifyDayIsOpen(day){
-        if(day[0]["active"]){
-            FormToGetSchedules(ConvertDateInFrench());
-        } else {
-            console.log("Désoler Jour fermé");
-            // DayIsClose();
-        }
-    }
-}
+    function RecreateArraySchedules(amIsFull, pmIsFull){
+        let arraySchedules = JSON.parse(sessionStorage.getItem("arraysSchedules"));
+        arraySchedules = arraySchedules[ConvertDateInFrench()];
 
-
-function FormToGetSchedules(dayInFrench){
-    const FORMDAY = {"dayInFrench" : dayInFrench};
-    DQLRequestDayIsOpen(FORMDAY);
-}
-
-function DQLRequestDayIsOpen(FORMDAY){
-    $.ajax({
-        url: '/daySchedules',
-        method: 'GET',
-        data: FORMDAY,
-        dataType: "json",
-        timeout: 1500,
-        success: function(data) {
-            ConvertDQLResult(data);
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            console.log(textStatus, errorThrown, jqXHR);
-        }
-    });
-}
-
-function ConvertDQLResult(DQLResult){
-    const SCHEDUELESARRAY = ["openAM", "closeAM", "openPM", "closePM"]
-    let schedulesConvert = {};
-
-    for(i = 0; i < 4; i++){
-        const SCHEDULES = DQLResult[0][SCHEDUELESARRAY[i]]["date"].replace(":00.000000", '').replace("1970-01-01 ", '');
-
-        schedulesConvert[SCHEDUELESARRAY[i]] = SCHEDULES;
-    }
-
-    VerifySchedulesIsOpen(schedulesConvert);
-}
-
-function VerifySchedulesIsOpen(schedulesList){
-    if(schedulesList["openAM"] == "00:00"){
-        // SchedulesClose();
-    } else {
-        const SCHEDULESAMARRAY = {"open" : schedulesList["openAM"], "close" : schedulesList["closeAM"]};
-        ForEachInSchedulesArray(SchedulesDisplay("Am"), SchedulesReservation(SCHEDULESAMARRAY));
-    }
-
-    if(schedulesList["openPM"] == "00:00"){
-        // SchedulesClose();
-    } else {
-        const SCHEDULESPMARRAY = {"open" : schedulesList["openPM"], "close" : schedulesList["closePM"]};
-        ForEachInSchedulesArray(SchedulesDisplay("Pm"), SchedulesReservation(SCHEDULESPMARRAY));
-    }
-}
-
-function SchedulesReservation(SCHEDULESAMARRAY){
-    const TIMEINMINUTESLIMITRESERVATION = 50;
-    const TIMEINSECONDELIMITRESERVATION = TIMEINMINUTESLIMITRESERVATION * 60;
-    const TIMEGAPINMINUTES = 15;
-    const TIMEGAPINSECONDE = TIMEGAPINMINUTES * 60;
-
-    const SCHEDULESLIMITRESERVATION = SCHEDULESAMARRAY["close"].split(':');
-    const SCHEDULESLIMITRESERVATIONINSECONDES = (Number(SCHEDULESLIMITRESERVATION[0])*3600) + (Number(SCHEDULESLIMITRESERVATION[1])*60) - TIMEINSECONDELIMITRESERVATION;
-
-    const SCHEDULESRESERVATION = SCHEDULESAMARRAY["open"].split(':');
-    let SchedulesResertionInSeconde = (Number(SCHEDULESRESERVATION[0])*3600) + (Number(SCHEDULESRESERVATION[1])*60);
-
-    let arrayScheduluesReservation = [];
-
-    do {
-        const HOURS = Math.trunc(SchedulesResertionInSeconde / 3600);
-        let minutes = (SchedulesResertionInSeconde % 3600) / 60;
-
-        if("".concat(minutes).length == 1){
-            minutes = "0".concat(minutes);
+        let arrayBooking = [];
+        if(!amIsFull){
+            arrayBooking = arrayBooking.concat(arraySchedules["AM"]);
         }
 
-        const RESULT = "".concat(HOURS, ':', minutes);
-        arrayScheduluesReservation.push(RESULT);
-        SchedulesResertionInSeconde += TIMEGAPINSECONDE;
-
-    } while(SchedulesResertionInSeconde < SCHEDULESLIMITRESERVATIONINSECONDES);
-
-    return(arrayScheduluesReservation);
-}
-
-function SchedulesDisplay(AmPmIndication){
-    let inputSchedules;
-    if(AmPmIndication == "Am"){
-        inputSchedules = document.querySelector("#schedules-AM");
-    } else {
-        inputSchedules = document.querySelector("#schedules-PM");
+        if(!pmIsFull){
+            arrayBooking = arrayBooking.concat(arraySchedules["PM"]);
+        }
+        ForEachInSchedulesArray(arrayBooking);
     }
-    return inputSchedules;
-}
 
-function ForEachInSchedulesArray(CLASSCHEDULES, SCHEDULESARRAY){
-    SCHEDULESARRAY.forEach(element => {
-        let p = document.createElement("option");
-        p.textContent = element;
-        p.value = element;
-        CLASSCHEDULES.prepend(p);
-    });
+    function ForEachInSchedulesArray(SCHEDULESARRAY){
+        SCHEDULESARRAY.forEach(element => {
+            AddOptionInSelectBalise(element, element);
+        });
+    }
+
+    function AddOptionInSelectBalise(contentBalise, valueBalise){
+        const CLASSCHEDULES = document.querySelector(".schedules");
+        let option = document.createElement("option");
+        option.textContent = contentBalise;
+        option.value = valueBalise;
+        CLASSCHEDULES.prepend(option);
+    }
+
+    const NUMBEROFPLACE = sessionStorage.getItem("numberOfPlace");
+    let date = new Date(Date.now() + 30000);
+    date = date.toUTCString();
+    document.cookie = "numberOfPlace=" + NUMBEROFPLACE + ";" + "path/reservation;" + "expires=" + date;
+    
+    const ARRAYSCHEDULES = sessionStorage.getItem("arraysSchedules");
+    document.cookie = "arraysSchedules=" + ARRAYSCHEDULES + ";" + "path/reservation;" + "expires=" + date;
+
+    console.log(document.cookie);
 }

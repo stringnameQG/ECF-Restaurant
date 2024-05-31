@@ -25,6 +25,22 @@ class FormulaType extends AbstractType
                 'required' => true,
                 'label' => 'Nom'
             ])
+            ->add('description', TextType::class, [
+                'attr' => [
+                    'class' => 'input__description',
+                    'maxlength' => '50'
+                ],
+                'required' => true,
+                'label' => 'description'
+            ])
+            ->add('dayAccuracy', TextType::class, [
+                'attr' => [
+                    'class' => 'input__dayAccuracy',
+                    'maxlength' => '50'
+                ],
+                'required' => true,
+                'label' => 'dayAccuracy'
+            ])
             ->add('price', NumberType::class, [
                 'attr' => [
                     'class' => 'input__price',

@@ -1,4 +1,26 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div>
+        {% if app.request.attributes.get('_route') == 'app_picture_dishes_edit' %}
+            {{ form_widget(form.pictures, {"attr": {"class": "pictue_widget"}}) }}
+            <div>
+                <img height="200px" width="200px" id="{{ picture_dish.id }}" src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture_dish.name ~ ".webp" }} alt="Image" decoding="async">
+            </div>
+        {% else %}
+            {{ form_row(form.pictures, {'attr': {'required': 'true'} }) }}
+        {% endif %}
+    </div>
+    <div>
+        {{ form_label(form.title) }} 
+        {{ form_widget(form.title) }} 
+    </div>
+    <div>
+        {{ form_label(form.dishes) }} 
+        {{ form_widget(form.dishes) }} 
+    </div>
+    <div>
+        {{ form_label(form.display) }}
+        {{ form_widget(form.display) }} 
+    </div>
+
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

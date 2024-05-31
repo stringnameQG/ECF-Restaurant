@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{ asset('icon/voiture.svg') }}">
+    {% block stylesheets %}
+    {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
+    <footer>
+        <nav>
+            <a class="nav-list__item" href="{{ path('app_accueil') }}">Accueil</a>
+            <a class="nav-list__item" href="{{ path('app_carte') }}">Carte</a>
+            <a class="nav-list__item" href="{{ path('app_reservation') }}">Reservation</a>
+            <a class="nav-list__item" href="{{ path('app_booking_index') }}">Booking</a>
+            <a class="nav-list__item" href="{{ path('app_day_index') }}">Day</a>
+            <a class="nav-list__item" href="{{ path('app_menu_index') }}">Menu</a>
+            <a class="nav-list__item" href="{{ path('app_category_index') }}">Category</a>
+            <a class="nav-list__item" href="{{ path('app_dishes_index') }}">Plat</a>
+            <a class="nav-list__item" href="{{ path('app_picture_dishes_index') }}">Plat Image</a>
+            <a class="nav-list__item" href="{{ path('app_formula_index') }}">Formule</a>
+            <a class="nav-list__item" href="{{ path('app_number_of_place_index') }}">Nombre de place</a>
+            <a class="nav-list__item" href="{{ path('app_register') }}">Crée compte</a>
+            <a class="nav-list__item" href="{{ path('app_login') }}">Connexion</a>
+            <a class="nav-list__item" href="{{ path('app_logout') }}">Déconnexion</a>
+        </nav>
+    </footer>
+    {% block body %}{% endblock %}
+    <footer>
+        {% if categorie.dishes[0] is defined and categorie.dishes[0] is not null %}
+        <div class="nos-horaires">
+            <h3>Nos horaires</h3>
+            {% for day in listDay %} 
+                {% if  day.Active == 1 %}
+                    {% if (day.name|length >= 3) %}
+                        <p class="horaire-ouverture__jour">{{ day.name|slice(0, 3) }}. 
+                    {% else %} 
+                        <p class="horaire-ouverture__jour">{{ day.name }}. 
+                    {% endif %}
+                    {% if day.openAM|date('H:i') != '00:00' or day.openAM|date('H:i') != '00:00'  %}
+                        {{ day.openPM ? day.openAM|date('H:i') : '' }} - 
+                        {{ day.closeAM ? day.closeAM|date('H:i') : '' }} ~
+                    {% else %}
+                    Fermé
+                    {% endif %}
+                    {% if day.openPM|date('H:i') != '00:00' or day.closePM|date('H:i') != '00:00'  %}
+                        {{ day.openPM ? day.openPM|date('H:i') : '' }} - 
+                        {{ day.closePM ? day.closePM|date('H:i') : '' }}
+                    {% else %}
+                    Fermé
+                    {% endif %}
+                    </p>
+                {% else %}
+                <p class="horaire-ouverture__jour">{{ day.name }} Fermé</p>
+                {% endif %}
+            {% else %}
+            <p>Aucun horaire renseigné</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </footer>
+</body>
 </html>

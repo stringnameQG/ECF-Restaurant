@@ -37,20 +37,18 @@ class PictureDishesController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $pictures = $form->get('pictures')->getData();
+            $picture = $form->get('pictures')->getData();
             $picturesTitle = $form->get('title')->getData();
             $picturesDishes = $form->get('dishes')->getData();
-
-            foreach($pictures as $picture) {
+            $picturesDisplay = $form->get('display')->getData();
                 
-                $fichier = $pictureService->add($picture);
+            $fichier = $pictureService->add($picture);
 
-                $img = new PictureDishes();
-                $img->setTitle($picturesTitle);
-                $img->setName($fichier);
-                $img->setDishes($picturesDishes);
-
-            }
+            $img = new PictureDishes();
+            $img->setTitle($picturesTitle);
+            $img->setName($fichier);
+            $img->setDishes($picturesDishes);
+            $img->setDisplay($picturesDisplay);
             
             $entityManager->persist($img);
             $entityManager->flush();
@@ -75,30 +73,13 @@ class PictureDishesController extends AbstractController
     #[Route('/{id}/edit', name: 'app_picture_dishes_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, 
     PictureDishes $pictureDish, 
-    EntityManagerInterface $entityManager,
-    PictureService $pictureService
+    EntityManagerInterface $entityManager
     ): Response
     {
-        $pictureDish = new PictureDishes();
         $form = $this->createForm(PictureDishesType::class, $pictureDish);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $pictures = $form->get('pictures')->getData();
-            $picturesTitle = $form->get('title')->getData();
-            $picturesDishes = $form->get('dishes')->getData();
-
-            // On boucle sur les images 
-            foreach($pictures as $picture) {
-                
-                $fichier = $pictureService->add($picture);
-
-                $img = new PictureDishes();
-                $img->setTitle($picturesTitle);
-                $img->setName($fichier);
-                $img->setDishes($picturesDishes);
-            }
 
             $entityManager->flush();
 

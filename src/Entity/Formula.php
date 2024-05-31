@@ -34,6 +34,12 @@ class Formula
     #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'Formula')]
     private Collection $menus;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $dayAccuracy = null;
+
     public function __construct()
     {
         $this->menus = new ArrayCollection();
@@ -91,6 +97,30 @@ class Formula
         if ($this->menus->removeElement($menu)) {
             $menu->removeFormula($this);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDayAccuracy(): ?string
+    {
+        return $this->dayAccuracy;
+    }
+
+    public function setDayAccuracy(string $dayAccuracy): static
+    {
+        $this->dayAccuracy = $dayAccuracy;
 
         return $this;
     }

@@ -2,12 +2,16 @@
 
 {% block title %}Edit PictureDishes{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/picture_dishes.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Edit PictureDishes</h1>
 
     {{ include('picture_dishes/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_picture_dishes_index') }}">back to list</a>
-
-    {{ include('picture_dishes/_delete_form.html.twig') }}
+{#
+    {{ include('picture_dishes/_delete_form.html.twig') }}#}
 {% endblock %}

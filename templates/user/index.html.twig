@@ -8,34 +8,28 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Password</th>
+                <th>NumberOfGuests</th>
+                <th>NomReservation</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for user in users %}
+        {% for user in users %}     
+        {% if "ROLE_ADMIN" not in user.roles  %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.numberOfGuests }}</td>
                 <td>{{ user.defaultName }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+        {% endif %}
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('app_user_new') }}">Create new</a>
 {% endblock %}

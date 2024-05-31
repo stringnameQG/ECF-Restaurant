@@ -40,6 +40,10 @@ class BookingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $date = $form->get('date')->getData();
+            $booking->setDate($date);
+
             $entityManager->persist($booking);
             $entityManager->flush();
 

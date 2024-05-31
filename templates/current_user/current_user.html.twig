@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CurrentUserController!{% endblock %}
+
+{% block body %}
+{% if user == null %}
+    <span>Aucun utilisateur connecté</span>
+{% else %}
+    {{ include('current_user/_form.html.twig', {'button_label': 'Update'}) }}
+{% endif %}
+{% endblock %}

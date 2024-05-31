@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class PictureDishesType extends AbstractType
 {
@@ -20,7 +19,8 @@ class PictureDishesType extends AbstractType
             ->add('title', TextType::class, [
                 'attr' => [
                     'class' => 'input__title',
-                    'maxlength' => '50'
+                    'maxlength' => '50',
+                    'visibility'=> 'hidden'
                 ],
                 'required' => true,
                 'label' => 'Titre'
@@ -31,9 +31,9 @@ class PictureDishesType extends AbstractType
                     'accept' => 'image/*',
                 ],
                 'label' => 'Images',
-                'multiple' => true,
+                'multiple' => false,
                 'mapped' => false,
-                'required' => true,
+                'required' => false,
             ])
             ->add('dishes', EntityType::class, [
                 'class' => Dishes::class,

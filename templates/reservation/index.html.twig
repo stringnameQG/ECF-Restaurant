@@ -4,34 +4,11 @@
 
 {% block javascripts %}
     <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('js/RequeteNumberOfPlace.js') }}"></script>
+    <script src="{{ asset('js/RequeteAllDay.js') }}"></script>
     <script src="{{ asset('js/RecuperationDate.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-
-<form>
-    <label for="booking_date" class="required">Date Réservation</label>
-    <input id="booking_date" class="input__date" type="date">
-</form> 
-
-<select>
-    {# <option value="">--Matin--</option> #}
-    <div id="schedules-AM" class="schedules-AM">
-    </div>
-
-    {# <option value="">--Soire--</option> #}
-    <div id="schedules-PM" class="schedules-PM">
-
-    </div>
-</select>
-
-{#
-<div class="schedules-AM">
-
-</div>
-<div class="schedules-PM">
-
-</div>
-#}
-
+    {{ include('reservation/_form.html.twig') }}
 {% endblock %}

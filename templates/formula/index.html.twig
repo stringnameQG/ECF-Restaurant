@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Description</th>
+                <th>PrecisionJour</th>
                 <th>Price</th>
                 <th>actions</th>
             </tr>
@@ -19,6 +21,8 @@
             <tr>
                 <td>{{ formula.id }}</td>
                 <td>{{ formula.name }}</td>
+                <td>{{ formula.description }}</td>
+                <td>{{ formula.dayAccuracy }}</td>
                 <td>{{ formula.price }}</td>
                 <td>
                     <a href="{{ path('app_formula_show', {'id': formula.id}) }}">show</a>

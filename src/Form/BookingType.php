@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BookingType extends AbstractType
 {
@@ -21,12 +23,13 @@ class BookingType extends AbstractType
             ->add('numberOfGuests', IntegerType::class, [
                 'attr' => [
                     'class' => 'input__numberOfGuests',
-                    'min' => '0'
+                    'min' => '1',
+                    'max' => '20'
                 ],
                 'required' => true,
                 'label' => 'Nombre de personne'
             ])
-            ->add('date', DateTimeType::class, [
+            ->add('date', DateType::class, [
                 'attr' => [
                     'class' => 'input__date'
                 ],
@@ -44,9 +47,21 @@ class BookingType extends AbstractType
             ->add('Allergy', EntityType::class, [
                 'class' => Allergy::class,
                 'choice_label' => 'name',
+                'label' => 'Allergy',
                 'required' => false,
                 'multiple' => true,
             ])
+            ->add('hours', ChoiceType::class, [
+                'choices'  => [
+                    '--Sélectionner une date--' => ""
+                ],
+                'attr' => [
+                    'class' => 'schedules',
+                ],
+                "mapped" => false,
+                'required' => true,
+            ])
+            ->get('hours')->resetViewTransformers();
         ;
     }
 

@@ -1,41 +1,11 @@
 <?php
 
-$adresseBdd = new PDO('mysql:host=localhost;dbname=restaurantarnaudmichant;charset=utf8', 'root', '');
+$date = "2024-05-30";
 
-$sql = 'SELECT date_open
-FROM catering_service 
-ORDER BY date_open
-DESC LIMIT 1';
+$hours = "12:30";
 
-$recipesStatement = $adresseBdd->prepare($sql);
-$recipesStatement->execute();
-$derniereEnregistrement = $recipesStatement->fetchAll();
+$completDate = $date . " " . $hours;    var_dump($completDate);
 
-if(count($derniereEnregistrement) != 0){ echo 'if';
-    CreationLimiteDateReservation($derniereEnregistrement);
-} else { echo 'else';
-    $dateDebut = date('Y-m-d', strtotime(date("Y-m-d"). ' + 1 days'));
-    
-    CreationLimiteDateReservation($dateDebut);
-}
+$completDate = DateTime::createFromFormat('Y-m-d H:i',$completDate);
 
-
-function CreationDateReservationJour($dateDebut, $derniereDate)
-{   
-    // $dateDebut = new DateTime($dateDebut);
-    // $dateDebut = new DateTime($dateDebut);
-    echo $dateDebut; echo ' ' . $derniereDate;
-    $start = new DateTime('2009-01-01');
-    $end = new DateTime('2009-02-09');
-
-    foreach (new DatePeriod($dateDebut, new DateInterval('P1D'), $end) as $day) {
-        echo $day->format('Y-m-d');
-    }
-}
-
-function CreationLimiteDateReservation($dateDebut){
-    $dureeAjoute = ' + 1 year';
-    $dateAujourdhui = date("Y");
-    $derniereDate = date('Y-m-d', strtotime($dureeAjoute, strtotime($dateAujourdhui) ));
-    CreationDateReservationJour($dateDebut, $derniereDate);
-}
+var_dump($completDate);

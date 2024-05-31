@@ -16,6 +16,19 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
+    public function findBookingIfFull(string $schedulesOpen, string $schedulesClose): array
+    {
+        return $this->createQueryBuilder('b')
+            ->select('SUM(b.numberOfGuests)')
+            ->andWhere('b.date BETWEEN :schedulesOpen AND :schedulesClose')
+            ->setParameter('schedulesOpen', $schedulesOpen)
+            ->setParameter('schedulesClose', $schedulesClose)
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Booking[] Returns an array of Booking objects
     //     */

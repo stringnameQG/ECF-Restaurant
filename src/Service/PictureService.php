@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
 
-// configuration adresse du cloud cloudinary
 $config = Configuration::instance();
 $config->cloud->cloudName = 'hqzz8nqsu';
 $config->cloud->apiKey = '119856113591654';
