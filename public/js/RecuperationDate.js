@@ -170,6 +170,4 @@ function ReservationDate(){
     
     const ARRAYSCHEDULES = sessionStorage.getItem("arraysSchedules");
     document.cookie = "arraysSchedules=" + ARRAYSCHEDULES + ";" + "path/reservation;" + "expires=" + date;
-
-    console.log(document.cookie);
 }

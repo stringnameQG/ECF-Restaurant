@@ -1,3 +1,4 @@
+GetAllDayOpen();
 function GetAllDayOpen(){
     $.ajax({
         url: '/AlldayIfOpen',

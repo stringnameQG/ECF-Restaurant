@@ -1,3 +1,4 @@
+GetNumberOfPlace();
 function GetNumberOfPlace(){
     $.ajax({
         url: '/NumberOfPlace',
