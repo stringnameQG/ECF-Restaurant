@@ -42,14 +42,6 @@ class FormulaController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_formula_show', methods: ['GET'])]
-    public function show(Formula $formula): Response
-    {
-        return $this->render('formula/show.html.twig', [
-            'formula' => $formula,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_formula_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Formula $formula, EntityManagerInterface $entityManager): Response
     {

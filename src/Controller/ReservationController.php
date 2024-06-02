@@ -149,15 +149,16 @@ class ReservationController extends AbstractController
                     $mailer->ConfirmBooking($emailAdresse, $numberOfGuests, $resevationName, $dateReservation);
                 }
 
-                return $this->redirectToRoute('app_booking_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
             }
         }
-        
         $user = $this->getUser();
+        
         return $this->render('reservation/index.html.twig', [
             'booking' => $booking,
             'form' => $form,
             'currentUser' => $user,
+            'listDay' => $dayRepository->findAll(),
         ]);
     }
 

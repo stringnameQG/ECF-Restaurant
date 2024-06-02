@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
 use App\Form\RegistrationFormType;
+use App\Repository\DayRepository;
 use App\Security\UserAuthenticator;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -12,8 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 
 class RegistrationController extends AbstractController
@@ -24,11 +25,13 @@ class RegistrationController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher, 
         Security $security, 
         EntityManagerInterface $entityManager,
-        MailerInterface $mailer
+        DayRepository $dayRepository,
+        Mailer $mail
     ): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $user->setRoles(['ROLE_USER']);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,29 +39,24 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $email = (new Email())
-            ->from('QuaiAntique@gmail.com')
-            ->to($form->get('email')->getData())
-            ->subject('Restaurant QuaiAntique')
-            ->text('Vous venez de crée un compte au Restaurant QuaiAntique. Votre mot de passe est ' .
-                $form->get('plainPassword')->getData() );
+            $emailAdresse = $form->get('email')->getData();
+            $password = $form->get('password')->getData();
 
-            $mailer->send($email);
+            $mail->ConfirmInscription($emailAdresse, $password);
 
-            return $this->redirectToRoute('app_accueil');
-
-            // return $security->login($user, UserAuthenticator::class, 'main');
+            return $security->login($user, UserAuthenticator::class, 'main');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+            'listDay' => $dayRepository->findAll(),
         ]);
     }
 }

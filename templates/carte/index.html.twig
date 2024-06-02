@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block body %}
+{% block main %}
 <h1>MENU {{ menu[0].title }}</h1>   
 {% for categorie in menu[0].Category %}
 {% if categorie.dishes[0] is defined and categorie.dishes[0] is not null %}

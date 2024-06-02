@@ -62,14 +62,6 @@ class PictureDishesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_picture_dishes_show', methods: ['GET'])]
-    public function show(PictureDishes $pictureDish): Response
-    {
-        return $this->render('picture_dishes/show.html.twig', [
-            'picture_dish' => $pictureDish,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_picture_dishes_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, 
     PictureDishes $pictureDish, 

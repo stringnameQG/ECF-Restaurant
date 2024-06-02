@@ -62,11 +62,27 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
+    #[Route('/MonCompte', name: 'app_user_mon_compte', methods: ['GET', 'POST'])]
+    public function MonCompte(
+        Request $request, 
+        EntityManagerInterface $entityManager,
+    ): Response
     {
-        return $this->render('user/show.html.twig', [
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('current_user/current_user.html.twig', [
             'user' => $user,
+            'form' => $form,
         ]);
     }
 

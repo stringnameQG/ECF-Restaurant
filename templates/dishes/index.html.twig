@@ -6,7 +6,7 @@
 
 {% block title %}Dishes index{% endblock %}
 
-{% block body %}
+{% block main %}
     <script src="{{ asset('js/images.js') }}"></script>
     <h1>Dishes index</h1>
 
@@ -28,7 +28,7 @@
                 <td>{{ dish.description }}</td>
                 <td>{{ dish.price }}</td>
                 <td>
-                    <a href="{{ path('app_dishes_show', {'id': dish.id}) }}">show</a>
+                    {{ include('dish/_delete_form.html.twig') }}
                     <a href="{{ path('app_dishes_edit', {'id': dish.id}) }}">edit</a>
                 </td>
             </tr>

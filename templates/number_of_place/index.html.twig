@@ -2,7 +2,7 @@
 
 {% block title %}NumberOfPlace index{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>NumberOfPlace index</h1>
 
     <table class="table">
@@ -19,7 +19,7 @@
                 <td>{{ number_of_place.id }}</td>
                 <td>{{ number_of_place.numberOfPlace }}</td>
                 <td>
-                    <a href="{{ path('app_number_of_place_show', {'id': number_of_place.id}) }}">show</a>
+                    {{ include('number_of_place/_delete_form.html.twig') }}
                     <a href="{{ path('app_number_of_place_edit', {'id': number_of_place.id}) }}">edit</a>
                 </td>
             </tr>

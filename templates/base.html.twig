@@ -11,12 +11,13 @@
     {% endblock %}
 </head>
 <body>
-    <footer>
+    <header>
         <nav>
             <a class="nav-list__item" href="{{ path('app_accueil') }}">Accueil</a>
             <a class="nav-list__item" href="{{ path('app_carte') }}">Carte</a>
-            <a class="nav-list__item" href="{{ path('app_allergy_index') }}">Allergie</a>
             <a class="nav-list__item" href="{{ path('app_reservation') }}">Reservation</a>
+            {% if is_granted('ROLE_ADMIN') %} 
+            <a class="nav-list__item" href="{{ path('app_allergy_index') }}">Allergie</a>
             <a class="nav-list__item" href="{{ path('app_booking_index') }}">Booking</a>
             <a class="nav-list__item" href="{{ path('app_day_index') }}">Day</a>
             <a class="nav-list__item" href="{{ path('app_menu_index') }}">Menu</a>
@@ -25,15 +26,26 @@
             <a class="nav-list__item" href="{{ path('app_picture_dishes_index') }}">Plat Image</a>
             <a class="nav-list__item" href="{{ path('app_formula_index') }}">Formule</a>
             <a class="nav-list__item" href="{{ path('app_number_of_place_index') }}">Nombre de place</a>
-            <a class="nav-list__item" href="{{ path('app_register') }}">Crée compte</a>     
             <a class="nav-list__item" href="{{ path('app_user_index') }}">User</a>
-            <a class="nav-list__item" href="{{ path('app_login') }}">Connexion</a>
             <a class="nav-list__item" href="{{ path('app_logout') }}">Déconnexion</a>
+            <a class="nav-list__item" href="{{ path('app_user_mon_compte') }}">Mon compte</a> 
+            {% elseif is_granted('ROLE_USER') %}
+            <a class="nav-list__item" href="{{ path('app_user_mon_compte') }}">Mon compte</a> 
+            <a class="nav-list__item" href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+            <a class="nav-list__item" href="{{ path('app_login') }}">Connexion</a>     
+            <a class="nav-list__item" href="{{ path('app_register') }}">Crée compte</a>  
+            {% endif %} 
         </nav>
-    </footer>
-    {% block body %}{% endblock %}
+    </header>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+        {% block aside %}{% endblock %}
+        
     <footer>
-        {% if categorie.dishes[0] is defined and categorie.dishes[0] is not null %}
+        {% if listDay is defined and listDay is not null %}
         <div class="nos-horaires">
             <h3>Nos horaires</h3>
             {% for day in listDay %} 

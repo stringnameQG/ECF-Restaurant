@@ -42,14 +42,6 @@ class MenuController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_menu_show', methods: ['GET'])]
-    public function show(Menu $menu): Response
-    {
-        return $this->render('menu/show.html.twig', [
-            'menu' => $menu,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_menu_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Menu $menu, EntityManagerInterface $entityManager): Response
     {

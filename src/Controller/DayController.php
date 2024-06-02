@@ -42,14 +42,6 @@ class DayController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_day_show', methods: ['GET'])]
-    public function show(Day $day): Response
-    {
-        return $this->render('day/show.html.twig', [
-            'day' => $day,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_day_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Day $day, EntityManagerInterface $entityManager): Response
     {

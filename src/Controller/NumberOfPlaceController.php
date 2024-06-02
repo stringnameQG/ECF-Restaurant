@@ -42,14 +42,6 @@ class NumberOfPlaceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_number_of_place_show', methods: ['GET'])]
-    public function show(NumberOfPlace $numberOfPlace): Response
-    {
-        return $this->render('number_of_place/show.html.twig', [
-            'number_of_place' => $numberOfPlace,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_number_of_place_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, NumberOfPlace $numberOfPlace, EntityManagerInterface $entityManager): Response
     {

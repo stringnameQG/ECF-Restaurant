@@ -37,8 +37,25 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/, roles: PUBLIC_ACCESS }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/carte, roles: PUBLIC_ACCESS }
+        - { path: ^/reservation, roles: PUBLIC_ACCESS }
+
+        - { path: ^/user/MonCompte, roles: ROLE_USER }
+        - { path: ^/logout, roles: ROLE_USER }
+
+        - { path: ^/allergy, roles: ROLE_ADMIN }
+        - { path: ^/booking, roles: ROLE_ADMIN }
+        - { path: ^/day, roles: ROLE_ADMIN }
+        - { path: ^/menu, roles: ROLE_ADMIN }
+        - { path: ^/category, roles: ROLE_ADMIN }
+        - { path: ^/dishes, roles: ROLE_ADMIN }
+        - { path: ^/picture/dishes, roles: ROLE_ADMIN }
+        - { path: ^/formula, roles: ROLE_ADMIN }
+        - { path: ^/number/of/place, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
     role_hierarchy:
        ROLE_ADMIN:       ROLE_USER
 

@@ -68,14 +68,6 @@ class BookingController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_booking_show', methods: ['GET'])]
-    public function show(Booking $booking): Response
-    {
-        return $this->render('booking/show.html.twig', [
-            'booking' => $booking,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_booking_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Booking $booking, EntityManagerInterface $entityManager): Response
     {

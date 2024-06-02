@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     {% for picture in pictureDishes %}
         <div>
             <img title="{{ picture.title }}" height="200px" width="200px" id="{{ picture.id }}" src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture.name ~ ".webp" }} alt="Image" decoding="async">

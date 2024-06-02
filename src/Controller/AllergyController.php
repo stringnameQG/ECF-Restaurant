@@ -42,14 +42,6 @@ class AllergyController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_allergy_show', methods: ['GET'])]
-    public function show(Allergy $allergy): Response
-    {
-        return $this->render('allergy/show.html.twig', [
-            'allergy' => $allergy,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_allergy_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Allergy $allergy, EntityManagerInterface $entityManager): Response
     {

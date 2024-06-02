@@ -48,14 +48,6 @@ class DishesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_dishes_show', methods: ['GET'])]
-    public function show(Dishes $dish): Response
-    {
-        return $this->render('dishes/show.html.twig', [
-            'dish' => $dish,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_dishes_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request, 

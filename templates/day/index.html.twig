@@ -2,7 +2,7 @@
 
 {% block title %}Day index{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Day index</h1>
 
     <table class="table">
@@ -27,7 +27,7 @@
                 <td>{{ day.openPM ? day.openPM|date('H:i:s') : '' }}</td>
                 <td>{{ day.closePM ? day.closePM|date('H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_day_show', {'id': day.id}) }}">show</a>
+                    {{ include('day/_delete_form.html.twig') }}
                     <a href="{{ path('app_day_edit', {'id': day.id}) }}">edit</a>
                 </td>
             </tr>

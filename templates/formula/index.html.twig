@@ -2,7 +2,7 @@
 
 {% block title %}Formula index{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Formula index</h1>
 
     <table class="table">
@@ -25,7 +25,7 @@
                 <td>{{ formula.dayAccuracy }}</td>
                 <td>{{ formula.price }}</td>
                 <td>
-                    <a href="{{ path('app_formula_show', {'id': formula.id}) }}">show</a>
+                    {{ include('formula/_delete_form.html.twig') }}
                     <a href="{{ path('app_formula_edit', {'id': formula.id}) }}">edit</a>
                 </td>
             </tr>
