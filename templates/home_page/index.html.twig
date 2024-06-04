@@ -1,10 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/Accueil/accueil.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/Accueil/Carrousel.js') }}"></script>
+{% endblock %}
+
 {% block main %}
+    <div class="slide-container">
     {% for picture in pictureDishes %}
-        <div>
-            <img title="{{ picture.title }}" height="200px" width="200px" id="{{ picture.id }}" src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture.name ~ ".webp" }} alt="Image" decoding="async">
+        <div class="dishes fade">
+          <img class="dishes-picture" title="{{ picture.title }}" src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture.name ~ ".webp" }} alt="Image" decoding="async">
+          <div class="dishes-title">{{ picture.title }}</div>
         </div>
     {% endfor %}
-    <a href="{{ path('app_reservation') }}">Réservé<a>
+    </div>
+    <a class="reserver" href="{{ path('app_reservation') }}">RESERVER</a>
 {% endblock %}

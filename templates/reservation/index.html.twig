@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/Reservation/reservation.css') }}">
+{% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('js/RequeteNumberOfPlace.js') }}"></script>
     <script src="{{ asset('js/RequeteAllDay.js') }}"></script>
     <script src="{{ asset('js/RecuperationDate.js') }}"></script>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Service\Mailer;
+use App\Repository\AllergyRepository;
 use App\Repository\BookingRepository;
 use App\Repository\DayRepository;
 use App\Repository\NumberOfPlaceRepository;
@@ -24,6 +25,7 @@ class ReservationController extends AbstractController
         DayRepository $dayRepository, 
         NumberOfPlaceRepository $numberOfPlaceRepository,
         BookingRepository $bookingRepository,
+        AllergyRepository $allergyRepository
     ): Response
     {
         $booking = new Booking();
@@ -159,6 +161,7 @@ class ReservationController extends AbstractController
             'form' => $form,
             'currentUser' => $user,
             'listDay' => $dayRepository->findAll(),
+            'allergy' => $allergyRepository->findAll(),
         ]);
     }
 

@@ -3,9 +3,10 @@
         {{ form_label(form.date) }} 
         {{ form_widget(form.date) }} 
     </div>
-
-    {{ form_label(form.hours) }} 
-    {{ form_widget(form.hours) }}
+    <div>
+        {{ form_label(form.hours) }} 
+        {{ form_widget(form.hours) }}
+    </div>
     
     {% if currentUser is not defined or currentUser is null %}
     <div>
@@ -18,7 +19,7 @@
     </div>
     <div>
         {{ form_label(form.Allergy) }} 
-        {{ form_widget(form.Allergy) }} 
+        {{ form_widget(form.Allergy, { 'attr': {'size': allergy|length} }) }}
     </div>
 {% else %}
     <div>
@@ -44,5 +45,5 @@
         {% endfor %}
     </select>
 {% endif %}
-    <button class="btn-enregistrer">{{ button_label|default('Réserver') }}</button>
+    <button class="btn-enregistrer">{{ button_label|default('RESERVER') }}</button>
 {{ form_end(form) }}

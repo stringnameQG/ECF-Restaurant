@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\RegistrationFormType;
+use App\Repository\AllergyRepository;
 use App\Repository\DayRepository;
 use App\Security\UserAuthenticator;
 use App\Service\Mailer;
@@ -26,7 +27,8 @@ class RegistrationController extends AbstractController
         Security $security, 
         EntityManagerInterface $entityManager,
         DayRepository $dayRepository,
-        Mailer $mail
+        Mailer $mail,
+        AllergyRepository $allergyRepository
     ): Response
     {
         $user = new User();
@@ -57,6 +59,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
             'listDay' => $dayRepository->findAll(),
+            'allergy' => $allergyRepository->findAll(),
         ]);
     }
 }

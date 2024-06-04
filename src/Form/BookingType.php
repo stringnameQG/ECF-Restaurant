@@ -42,12 +42,12 @@ class BookingType extends AbstractType
                     'maxlength' => '255'
                 ],
                 'required' => true,
-                'label' => 'Nom'
+                'label' => 'Nom Reservation'
             ])
             ->add('Allergy', EntityType::class, [
                 'class' => Allergy::class,
                 'choice_label' => 'name',
-                'label' => 'Allergy',
+                'label' => 'Allergie',
                 'required' => false,
                 'multiple' => true,
             ])
@@ -58,6 +58,7 @@ class BookingType extends AbstractType
                 'attr' => [
                     'class' => 'schedules',
                 ],
+                'label' => 'Heure',
                 "mapped" => false,
                 'required' => true,
             ])
