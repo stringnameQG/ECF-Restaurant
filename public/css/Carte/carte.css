@@ -1,0 +1,43 @@
+main {
+    max-width: 700px;
+    margin: 6px;
+    padding: 6px;
+    border: solid 1px black;
+    border-radius: 20px;
+    color: white;
+    background-color: black;
+    align-self: center;
+}
+article {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 6px;
+}
+div {
+    width: 100%;
+    margin: 0px 4px;
+}
+.dishes {
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.dishes__title-description {
+    margin: 0px;
+}
+.title, .description, .price {
+    max-width: fit-content;
+}
+.price {
+    margin: 0px;
+    min-width: fit-content;
+}
+.formule {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
