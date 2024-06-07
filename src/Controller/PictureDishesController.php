@@ -50,7 +50,7 @@ class PictureDishesController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-
+        
             $picture = $form->get('pictures')->getData();
             $picturesTitle = $form->get('title')->getData();
             $picturesDishes = $form->get('dishes')->getData();

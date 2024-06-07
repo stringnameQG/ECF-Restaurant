@@ -22,7 +22,7 @@ class PictureService
     {
         $this->params = $params;
     }
-/*
+
     public function add(UploadedFile $picture)
     {
         function VerificationFormatImage($pitctureInfos): void
@@ -77,7 +77,7 @@ class PictureService
 
         return $fichierNom;
     }
-*/
+
     public function deleteImageCloudinary(string $fichier)
     {
         $uploadFolder = 'RestaurantArnaudMichant';
@@ -85,74 +85,6 @@ class PictureService
         $cloudinary->destroy($uploadFolder . '/' . $fichier);
 
         return true;
-    }
-        
-
-
-    public function add(UploadedFile $picture)
-    {
-        function VerificationFormatImage($pitctureInfos)
-        {
-            if($pitctureInfos === false){
-                throw new Exception('Format d\'image incorrect');
-            } 
-        }
-
-        function VerificationTypeImage($pitctureInfos)
-        {
-            if($pitctureInfos === false){
-                throw new Exception('Format d\'image incorrect');
-            } 
-        }
-
-        $fichier = md5(uniqid(rand(), true));
-
-        $pitctureInfos = getimagesize($picture);
-
-        if($pitctureInfos === false){
-            throw new Exception('Format d\'image incorrect');
-        }
-
-        VerificationFormatImage($pitctureInfos);
-
-        VerificationTypeImage($pitctureInfos);
-
-        switch($pitctureInfos['mime']){
-            case 'image/png':
-                $pictureSource = imagecreatefrompng($picture);
-                break;
-            case 'image/jpeg':
-                $pictureSource = imagecreatefromjpeg($picture);
-                break;
-            case 'image/webp':
-                $pictureSource = imagecreatefromwebp($picture);
-                break;
-            default:
-                throw new Exception('Format d\'image incorrect');
-        }      
-
-        $path = $this->params->get('images_directory');
-        
-        imagewebp($pictureSource, $path . $fichier);
-
-        
-        $cloudinaryPath = $path . $fichier;
-
-        
-        $uploadFolder = 'RestaurantArnaudMichant';
-
-        
-        $upload = new UploadApi();
-
-        
-        $upload->upload($cloudinaryPath, [
-            'public_id' => $fichier,
-            'folder' => $uploadFolder
-        ]);
-
-        unlink($path . $fichier);
-
-        return $fichier;
     }
 }
 
