@@ -88,7 +88,7 @@ class PictureService
     }
 }
 
-/*
+/*    
 
 public function add(UploadedFile $picture)
     {
@@ -157,6 +157,5 @@ public function add(UploadedFile $picture)
 
         return $fichier;
     }
-
-
 */
+
