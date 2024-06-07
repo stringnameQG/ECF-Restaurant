@@ -66,6 +66,16 @@ class PictureService
 
         VerificationFormatImage($pitctureInfos = getimagesize($picture));
 
+        function DirExist($path){
+            if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+            }
+        }
+
+        $path = $this->params->get('images_directory');
+
+        DirExist($path);
+
         EnregistrementFichierImage(
             VerificationTypeImage($pitctureInfos, $picture), 
             $path = $this->params->get('images_directory') . $fichierNom = md5(uniqid(rand(), true))
@@ -88,8 +98,8 @@ class PictureService
     }
 }
 
-/*    
-
+    
+/*
 public function add(UploadedFile $picture)
     {
         function VerificationFormatImage($pitctureInfos)
@@ -157,5 +167,5 @@ public function add(UploadedFile $picture)
 
         return $fichier;
     }
-*/
 
+*/
