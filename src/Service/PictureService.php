@@ -22,7 +22,7 @@ class PictureService
     {
         $this->params = $params;
     }
-
+/*
     public function add(UploadedFile $picture)
     {
         function VerificationFormatImage($pitctureInfos): void
@@ -66,16 +66,6 @@ class PictureService
 
         VerificationFormatImage($pitctureInfos = getimagesize($picture));
 
-        function DirExist($path){
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
-            }
-        }
-
-        $path = $this->params->get('images_directory');
-
-        DirExist($path);
-
         EnregistrementFichierImage(
             VerificationTypeImage($pitctureInfos, $picture), 
             $path = $this->params->get('images_directory') . $fichierNom = md5(uniqid(rand(), true))
@@ -87,7 +77,7 @@ class PictureService
 
         return $fichierNom;
     }
-
+*/
     public function deleteImageCloudinary(string $fichier)
     {
         $uploadFolder = 'RestaurantArnaudMichant';
@@ -96,11 +86,10 @@ class PictureService
 
         return true;
     }
-}
+        
 
-    
-/*
-public function add(UploadedFile $picture)
+
+    public function add(UploadedFile $picture)
     {
         function VerificationFormatImage($pitctureInfos)
         {
@@ -115,10 +104,9 @@ public function add(UploadedFile $picture)
                 throw new Exception('Format d\'image incorrect');
             } 
         }
-        // stocker au format mp
+
         $fichier = md5(uniqid(rand(), true));
 
-        // On récupère les infos de l'image
         $pitctureInfos = getimagesize($picture);
 
         if($pitctureInfos === false){
@@ -126,10 +114,9 @@ public function add(UploadedFile $picture)
         }
 
         VerificationFormatImage($pitctureInfos);
-        
+
         VerificationTypeImage($pitctureInfos);
 
-        // On vérifie le format de l'image
         switch($pitctureInfos['mime']){
             case 'image/png':
                 $pictureSource = imagecreatefrompng($picture);
@@ -145,19 +132,19 @@ public function add(UploadedFile $picture)
         }      
 
         $path = $this->params->get('images_directory');
-        // On stocke l'image
-        imagewebp($pictureSource, $path . $fichier);
-    
-        // On crée le chemin de sauvegarde pour cloudinary
-        $cloudinaryPath = $path . $fichier;
         
-        // On ajoute le nom de dossier de stockage de l'image
+        imagewebp($pictureSource, $path . $fichier);
+
+        
+        $cloudinaryPath = $path . $fichier;
+
+        
         $uploadFolder = 'RestaurantArnaudMichant';
 
-        // On crée une instance de UploadApi
+        
         $upload = new UploadApi();
 
-        // On effectue la sauvegarde 
+        
         $upload->upload($cloudinaryPath, [
             'public_id' => $fichier,
             'folder' => $uploadFolder
@@ -167,5 +154,7 @@ public function add(UploadedFile $picture)
 
         return $fichier;
     }
+}
 
-*/
+    
+
