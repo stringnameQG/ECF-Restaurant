@@ -58,48 +58,11 @@ class PictureService
                 'folder' => $uploadFolder
             ]);
         }
-        /*
-        function SupressionFichierImage($path): void
-        {
-            unlink($path);
-        }        
-        */
+
         VerificationFormatImage($pitctureInfos = getimagesize($picture));
-        /*
-        EnregistrementFichierImage(
-            VerificationTypeImage($pitctureInfos, $picture), 
-            $path = $this->params->get('images_directory') . $fichierNom = md5(uniqid(rand(), true))
-        );
-        */
 
-        $fichierNom = md5(uniqid(rand(), true));
+        EnregistrementImageCloudinary($path = $_FILES["picture_dishes"]["tmp_name"]["pictures"], $fichierNom = md5(uniqid(rand(), true)));
 
-        EnregistrementImageCloudinary($path = $_FILES["picture_dishes"]["tmp_name"]["pictures"], $fichierNom);
-
-        // EnregistrementImageCloudinary($path, $fichierNom);
-
-        // SupressionFichierImage($path);
-/*
-        { ["picture_dishes"]=> array(6) { 
-                ["name"]=> array(1) { 
-                    ["pictures"]=> string(27) "TomateCerisesDansUnBol.webp" } 
-                ["full_path"]=> array(1) { 
-                    ["pictures"]=> string(27) "TomateCerisesDansUnBol.webp" } 
-                ["type"]=> array(1) 
-                { 
-                    ["pictures"]=> string(10) "image/webp" } 
-                ["tmp_name"]=> array(1) 
-                { 
-                    ["pictures"]=> string(45) "C:\Users\kentg\AppData\Local\Temp\php493B.tmp" } 
-                ["error"]=> array(1) 
-                { 
-                    ["pictures"]=> int(0) } 
-                ["size"]=> array(1) 
-                { 
-                    ["pictures"]=> int(86406) } 
-            } 
-        } 
-*/
         return $fichierNom;
     }
 

@@ -13,7 +13,7 @@ $(cross).click(function() {
     $(cross).animate(
         { deg: rotation },
         {
-            duration: 200,
+            duration: 400,
             step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
             }
@@ -22,25 +22,17 @@ $(cross).click(function() {
     
     rotation += 45;
     if(active){
-        Style("none", 0, 1, 1, 1, 'auto');
+        Style("none", 0, 1, 'auto');
         active = false;
     } else {
-        Style("flex", 1, 0, 0, 0, 'hidden');
+        Style("flex", 1, 0, 'hidden');
         active = true;
     }
 
     function Style(nav_diplay, nav_opacity, main_opacity, footer_opacity, body_overflow){
         nav.style.display = nav_diplay;
         nav.style.opacity = nav_opacity;
-        main.style.opacity = main_opacity;
-        footer.style.opacity = footer_opacity;
         body.style.overflow = body_overflow;
-    }
-
-    try {
-
-    } catch {
-        
     }
 });
 });
