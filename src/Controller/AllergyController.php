@@ -10,15 +10,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\Common\Collections\Criteria;
 
 #[Route('/allergy')]
 class AllergyController extends AbstractController
 {
-    #[Route('/', name: 'app_allergy_index', methods: ['GET'])]
-    public function index(AllergyRepository $allergyRepository): Response
+    #[Route('/{page<\d+>?1}', name: 'app_allergy_index', methods: ['GET'])]
+    public function index(AllergyRepository $allergyRepository, int $page): Response
     {
+        $allergyPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $allergyPerPage)
+            ->setMaxResults($allergyPerPage);
+
+        $allergy = $allergyRepository->matching($criteria);
+
+        $totalAllergy = count($allergyRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalAllergy / $allergyPerPage);
         return $this->render('allergy/index.html.twig', [
-            'allergies' => $allergyRepository->findAll(),
+            'allergies' => $allergy,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

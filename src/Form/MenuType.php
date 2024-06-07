@@ -30,11 +30,13 @@ class MenuType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'title',
                 'multiple' => true,
+                'label' => 'Categorie'
             ])
             ->add('Formula', EntityType::class, [
                 'class' => Formula::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'label' => 'Formule'
             ])
         ;
     }

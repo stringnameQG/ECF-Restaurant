@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/Base/base.css') }}">
+{% endblock %}
 
 {% block main %}
-    <h1>User index</h1>
+    <h2>Utilisateur</h2>
 
+    <a class="btn-ajouter" href="{{ path('app_user_new') }}">AJOUTER</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>NumberOfGuests</th>
-                <th>NomReservation</th>
-                <th>actions</th>
+                <th>Nombre de personne</th>
+                <th>Nom reservation</th>
             </tr>
         </thead>
         <tbody>
@@ -20,17 +21,26 @@
         {% if "ROLE_ADMIN" not in user.roles  %}
             <tr>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.numberOfGuests }}</td>
                 <td>{{ user.defaultName }}</td>
-                <td>
+                <td class="td-action">
+                    <a class="btn-modifier" href="{{ path('app_user_edit', {'id': user.id}) }}">MODIFIER</a>
                     {{ include('user/_delete_form.html.twig') }}
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% endif %}
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('app_user_new') }}">Create new</a>
+{% endblock %}
+{% block aside %}
+<aside class='pagination'>
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span class="page-courante">{{ page }}</span>
+        {% else %}
+            <a class="page-non-courante" href="{{ path('app_user_index', {'page': page}) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</aside>
 {% endblock %}

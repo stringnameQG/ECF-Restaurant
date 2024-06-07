@@ -1,26 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}NumberOfPlace index{% endblock %}
-
 {% block main %}
-    <h1>NumberOfPlace index</h1>
+    <h2>Nombre de place disponible</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>NumberOfPlace</th>
-                <th>actions</th>
+                <th>Nombre de place</th>
             </tr>
         </thead>
         <tbody>
         {% for number_of_place in number_of_places %}
             <tr>
-                <td>{{ number_of_place.id }}</td>
                 <td>{{ number_of_place.numberOfPlace }}</td>
                 <td>
-                    {{ include('number_of_place/_delete_form.html.twig') }}
-                    <a href="{{ path('app_number_of_place_edit', {'id': number_of_place.id}) }}">edit</a>
+                    <a class="btn-modifier" href="{{ path('app_number_of_place_edit', {'id': number_of_place.id}) }}">MODIFIER</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +25,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_number_of_place_new') }}">Create new</a>
 {% endblock %}

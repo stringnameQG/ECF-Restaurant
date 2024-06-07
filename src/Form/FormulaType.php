@@ -39,7 +39,7 @@ class FormulaType extends AbstractType
                     'maxlength' => '50'
                 ],
                 'required' => true,
-                'label' => 'dayAccuracy'
+                'label' => 'Jour d\'ouverture'
             ])
             ->add('price', NumberType::class, [
                 'attr' => [

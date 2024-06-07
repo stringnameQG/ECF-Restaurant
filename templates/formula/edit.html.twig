@@ -1,13 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Formula{% endblock %}
-
 {% block main %}
-    <h1>Edit Formula</h1>
+    <h2>Modifier formule</h2>
 
-    {{ include('formula/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('formula/_form.html.twig', {'button_label': 'ENREGISTRER'}) }}
 
-    <a href="{{ path('app_formula_index') }}">back to list</a>
-
-    {{ include('formula/_delete_form.html.twig') }}
 {% endblock %}

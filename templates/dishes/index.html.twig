@@ -4,32 +4,28 @@
     <script src="{{ asset('js/images.js') }}"></script>
 {% endblock javascripts %}
 
-{% block title %}Dishes index{% endblock %}
-
 {% block main %}
     <script src="{{ asset('js/images.js') }}"></script>
-    <h1>Dishes index</h1>
+    <h2>Plat</h2>
 
+    <a class="btn-ajouter" href="{{ path('app_dishes_new') }}">AJOUTER</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
+                <th>Titre</th>
                 <th>Description</th>
-                <th>Price</th>
-                <th>actions</th>
+                <th>Prix</th>
             </tr>
         </thead>
         <tbody>
         {% for dish in dishes %}
             <tr>
-                <td>{{ dish.id }}</td>
                 <td>{{ dish.title }}</td>
                 <td>{{ dish.description }}</td>
                 <td>{{ dish.price }}</td>
-                <td>
-                    {{ include('dish/_delete_form.html.twig') }}
-                    <a href="{{ path('app_dishes_edit', {'id': dish.id}) }}">edit</a>
+                <td class="td-action">
+                    <a class="btn-modifier" href="{{ path('app_dishes_edit', {'id': dish.id}) }}">MODIFIER</a>
+                    {{ include('dishes/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -39,6 +35,15 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_dishes_new') }}">Create new</a>
+{% endblock %}
+{% block footer %}
+<footer class='pagination'>
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span class="page-courante">{{ page }}</span>
+        {% else %}
+            <a class="page-non-courante" href="{{ path('app_dishes_index', {'page': page}) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</footer>
 {% endblock %}

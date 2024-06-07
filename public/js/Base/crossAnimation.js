@@ -1,5 +1,3 @@
-/*
-*/
 window.addEventListener("load", (event) => {
     
 const body = document.querySelector("body");
@@ -21,12 +19,13 @@ $(cross).click(function() {
             }
         }
     );
+    
     rotation += 45;
     if(active){
-        Style("none", 0, 1, 1, 'auto');
+        Style("none", 0, 1, 1, 1, 'auto');
         active = false;
     } else {
-        Style("flex", 1, 0, 0, 'hidden');
+        Style("flex", 1, 0, 0, 0, 'hidden');
         active = true;
     }
 
@@ -36,6 +35,12 @@ $(cross).click(function() {
         main.style.opacity = main_opacity;
         footer.style.opacity = footer_opacity;
         body.style.overflow = body_overflow;
+    }
+
+    try {
+
+    } catch {
+        
     }
 });
 });

@@ -12,15 +12,29 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\Common\Collections\Criteria;
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/{page<\d+>?1}', name: 'app_user_index', methods: ['GET'])]
+    public function index(UserRepository $userRepository, int $page): Response
     {
+        $userPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $userPerPage)
+            ->setMaxResults($userPerPage);
+
+        $user = $userRepository->matching($criteria);
+
+        $totalUser = count($userRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalUser / $userPerPage);
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $user,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

@@ -10,15 +10,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\Common\Collections\Criteria;
 
 #[Route('/menu')]
 class MenuController extends AbstractController
 {
-    #[Route('/', name: 'app_menu_index', methods: ['GET'])]
-    public function index(MenuRepository $menuRepository): Response
+    #[Route('/{page<\d+>?1}', name: 'app_menu_index', methods: ['GET'])]
+    public function index(MenuRepository $menuRepository, int $page): Response
     {
+        $menuPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $menuPerPage)
+            ->setMaxResults($menuPerPage);
+
+        $menu = $menuRepository->matching($criteria);
+
+        $totalAllergy = count($menuRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalAllergy / $menuPerPage);
         return $this->render('menu/index.html.twig', [
-            'menus' => $menuRepository->findAll()
+            'menus' => $menu,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

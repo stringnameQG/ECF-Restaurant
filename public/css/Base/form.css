@@ -1,0 +1,62 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+form>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+}
+input, textarea {
+    width: 100%;
+}
+textarea {
+    resize: none;
+}
+.input__active {
+    width: 30px;
+    height: 30px;
+}
+table {
+    border-spacing: 10px;
+}
+.td-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+.btn-supprimer, .btn-modifier, .btn-ajouter {
+    padding: 2px 6px;
+    color: white;
+    font-size: 30px;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+.btn-modifier, .btn-ajouter {
+    text-decoration: none;
+}
+.btn-supprimer {
+    background-color: #a71818;
+}
+.btn-supprimer:hover {
+    background-color: #c63636;
+}
+.btn-modifier {
+    background-color: #dcc023;
+}
+.btn-modifier:hover {
+    background-color: #f6dc43;
+}
+.btn-ajouter {
+    background-color: #3dba1e;
+}
+.btn-ajouter:hover {
+    background-color: #48dc23;
+}

@@ -1,26 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Allergy index{% endblock %}
-
 {% block main %}
-    <h1>Allergy index</h1>
+    <h2>Allergie</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>Nom</th>
             </tr>
         </thead>
         <tbody>
         {% for allergy in allergies %}
             <tr>
-                <td>{{ allergy.id }}</td>
                 <td>{{ allergy.name }}</td>
-                <td>
+                <td class="td-action">
+                    <a class="btn-modifier" href="{{ path('app_allergy_edit', {'id': allergy.id}) }}">MODIFIER</a>
                     {{ include('allergy/_delete_form.html.twig') }}
-                    <a href="{{ path('app_allergy_edit', {'id': allergy.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +26,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_allergy_new') }}">Create new</a>
+    <a class="btn-ajouter" href="{{ path('app_allergy_new') }}">AJOUTER ALLERGIE</a>
+    
+{% endblock %}
+{% block footer %}
+<footer class='pagination'>
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span class="page-courante">{{ page }}</span>
+        {% else %}
+            <a class="page-non-courante" href="{{ path('app_allergy_index', {'page': page}) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</footer>
 {% endblock %}

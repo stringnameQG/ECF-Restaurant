@@ -1,7 +1,9 @@
 form {
+    width: 90vw;
+    max-width: 800px;
     background-color: rgb(242, 242, 242);
     padding: 10px 18px;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -21,5 +23,10 @@ input {
 }
 #booking_Allergy {
     overflow: hidden;
+}
 
+@media screen and (min-width: 1000px) {
+    form {
+        max-width: 600px;
+    }
 }

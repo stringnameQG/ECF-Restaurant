@@ -12,15 +12,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Common\Collections\Criteria;
 
 #[Route('/picture/dishes')]
 class PictureDishesController extends AbstractController
 {
-    #[Route('/', name: 'app_picture_dishes_index', methods: ['GET'])]
-    public function index(PictureDishesRepository $pictureDishesRepository): Response
+    #[Route('/{page<\d+>?1}', name: 'app_picture_dishes_index', methods: ['GET'])]
+    public function index(PictureDishesRepository $pictureDishesRepository, int $page): Response
     {
+        $pictureDishesPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $pictureDishesPerPage)
+            ->setMaxResults($pictureDishesPerPage);
+
+        $pictureDishes = $pictureDishesRepository->matching($criteria);
+
+        $totalPictureDishes = count($pictureDishesRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalPictureDishes / $pictureDishesPerPage);
         return $this->render('picture_dishes/index.html.twig', [
-            'picture_dishes' => $pictureDishesRepository->findAll(),
+            'picture_dishes' => $pictureDishes,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

@@ -1,32 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formula index{% endblock %}
-
 {% block main %}
-    <h1>Formula index</h1>
+    <h2>Formule</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>PrecisionJour</th>
-                <th>Price</th>
-                <th>actions</th>
+                <th>Precision Jour</th>
+                <th>Prix</th>
             </tr>
         </thead>
         <tbody>
         {% for formula in formulas %}
             <tr>
-                <td>{{ formula.id }}</td>
                 <td>{{ formula.name }}</td>
                 <td>{{ formula.description }}</td>
                 <td>{{ formula.dayAccuracy }}</td>
                 <td>{{ formula.price }}</td>
-                <td>
+                <td class="td-action">
                     {{ include('formula/_delete_form.html.twig') }}
-                    <a href="{{ path('app_formula_edit', {'id': formula.id}) }}">edit</a>
+                    <a class="btn-modifier" href="{{ path('app_formula_edit', {'id': formula.id}) }}">MODIFIER</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +32,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_formula_new') }}">Create new</a>
+    <a class="btn-ajouter" href="{{ path('app_formula_new') }}">Ajouter formule</a>
+{% endblock %}
+{% block aside %}
+<aside class='pagination'>
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span class="page-courante">{{ page }}</span>
+        {% else %}
+            <a class="page-non-courante" href="{{ path('app_menu_index', {'page': page}) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</aside>
 {% endblock %}

@@ -1,4 +1,23 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    <div>
+        {{ form_label(form.email) }} 
+        {{ form_widget(form.email) }} 
+    </div>
+    <div>
+        {{ form_label(form.password) }} 
+        {{ form_widget(form.password) }} 
+    </div>
+    <div>
+        {{ form_label(form.numberOfGuests) }} 
+        {{ form_widget(form.numberOfGuests) }} 
+    </div>
+    <div>
+        {{ form_label(form.defaultName) }} 
+        {{ form_widget(form.defaultName) }} 
+    </div>
+    <div>
+        {{ form_label(form.allergy) }} 
+        {{ form_widget(form.allergy) }} 
+    </div>
+    <button class="btn-ajouter">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

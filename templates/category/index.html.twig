@@ -3,24 +3,22 @@
 {% block title %}Category index{% endblock %}
 
 {% block main %}
-    <h1>Category index</h1>
+    <h1>Categorie</h1>
 
+    <a class="btn-ajouter" href="{{ path('app_category_new') }}">AJOUTER</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
-                <td>{{ category.id }}</td>
                 <td>{{ category.title }}</td>
-                <td>
+                <td class="td-action">
                     {{ include('category/_delete_form.html.twig') }}
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+                    <a class="btn-modifier" href="{{ path('app_category_edit', {'id': category.id}) }}">MODIFIER</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +29,15 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_category_new') }}">Create new</a>
+{% endblock %}
+{% block footer %}
+<footer class='pagination'>
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span class="page-courante">{{ page }}</span>
+        {% else %}
+            <a class="page-non-courante" href="{{ path('app_category_index', {'page': page}) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</footer>
 {% endblock %}

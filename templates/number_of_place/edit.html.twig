@@ -1,13 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit NumberOfPlace{% endblock %}
-
 {% block main %}
-    <h1>Edit NumberOfPlace</h1>
+    <h2>Modifier nombre de place</h2>
 
-    {{ include('number_of_place/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('number_of_place/_form.html.twig', {'button_label': 'ENREGISTRER'}) }}
 
-    <a href="{{ path('app_number_of_place_index') }}">back to list</a>
-
-    {{ include('number_of_place/_delete_form.html.twig') }}
 {% endblock %}

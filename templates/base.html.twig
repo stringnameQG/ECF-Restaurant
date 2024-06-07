@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/Base/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Base/form.css') }}">
     {% block stylesheets %}
     {% endblock %}
 
@@ -48,9 +49,8 @@
         {% block main %}{% endblock %}
     </main>
 
-        
+    {% if listDay is defined and listDay is not null %}
     <footer>
-        {% if listDay is defined and listDay is not null %}
         <div class="horaire">
             <h3>HORAIRE</h3>
             {% for day in listDay %} 
@@ -61,14 +61,14 @@
                         <p class="horaire-ouverture__jour">{{ day.name }}. 
                     {% endif %}
                     {% if day.openAM|date('H:i') != '00:00' or day.openAM|date('H:i') != '00:00'  %}
-                        {{ day.openPM ? day.openAM|date('H:i') : '' }} - 
-                        {{ day.closeAM ? day.closeAM|date('H:i') : '' }} ~
+                        <time datetime="{{ day.openAM|date('H:i') }}">{{ day.openPM ? day.openAM|date('H:i') : '' }}</time> - 
+                        <time datetime="{{ day.closeAM|date('H:i') }}">{{ day.closeAM ? day.closeAM|date('H:i') : '' }}</time> ~
                     {% else %}
                     Fermé
                     {% endif %}
                     {% if day.openPM|date('H:i') != '00:00' or day.closePM|date('H:i') != '00:00'  %}
-                        {{ day.openPM ? day.openPM|date('H:i') : '' }} - 
-                        {{ day.closePM ? day.closePM|date('H:i') : '' }}
+                        <time datetime="{{ day.openPM|date('H:i') }}">{{ day.openPM ? day.openPM|date('H:i') : '' }}</time> - 
+                        <time datetime="{{ day.closePM|date('H:i') }}">{{ day.closePM ? day.closePM|date('H:i') : '' }}</time>
                     {% else %}
                     Fermé
                     {% endif %}
@@ -80,7 +80,10 @@
             <p>Aucun horaire renseigné</p>
             {% endfor %}
         </div>
-        {% endif %}
     </footer>
+    {% endif %}
+
+    {% block footer %}{% endblock %}
+
 </body>
 </html>

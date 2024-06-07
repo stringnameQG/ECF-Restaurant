@@ -11,7 +11,7 @@
 {% block main %}
     <div class="slide-container">
     {% for picture in pictureDishes %}
-        <div class="dishes fade">
+        <div class="dishes">
           <img class="dishes-picture" title="{{ picture.title }}" src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture.name ~ ".webp" }} alt="Image" decoding="async">
           <div class="dishes-title">{{ picture.title }}</div>
         </div>

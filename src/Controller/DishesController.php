@@ -18,11 +18,24 @@ use App\Service\PictureService;
 #[Route('/dishes')]
 class DishesController extends AbstractController
 {
-    #[Route('/', name: 'app_dishes_index', methods: ['GET'])]
-    public function index(DishesRepository $dishesRepository): Response
+    #[Route('/{page<\d+>?1}', name: 'app_dishes_index', methods: ['GET'])]
+    public function index(DishesRepository $dishesRepository, int $page): Response
     {
+        $dishesPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $dishesPerPage)
+            ->setMaxResults($dishesPerPage);
+
+        $dishes = $dishesRepository->matching($criteria);
+
+        $totalAllergy = count($dishesRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalAllergy / $dishesPerPage);
         return $this->render('dishes/index.html.twig', [
-            'dishes' => $dishesRepository->findAll(),
+            'dishes' => $dishes,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
     #[Route('/new', name: 'app_dishes_new', methods: ['GET', 'POST'])]

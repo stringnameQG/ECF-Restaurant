@@ -57,6 +57,7 @@ class UserType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false,
+                'label' => 'Allergie',
                 'attr' => [
                     'choice_label' => 'id',
                     'multiple' => true,

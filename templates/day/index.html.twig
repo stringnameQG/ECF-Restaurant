@@ -1,34 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Day index{% endblock %}
-
 {% block main %}
-    <h1>Day index</h1>
+    <h2>Jour horaire</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Active</th>
-                <th>OpenAM</th>
-                <th>CloseAM</th>
-                <th>OpenPM</th>
-                <th>ClosePM</th>
-                <th>actions</th>
+                <th>Jour</th>
+                <th>Ouvert</th>
+                <th>Ouverture Matin</th>
+                <th>Fermeture Matin</th>
+                <th>Ouverture Soir</th>
+                <th>Fermeture Soir</th>
             </tr>
         </thead>
         <tbody>
         {% for day in days %}
             <tr>
-                <td>{{ day.id }}</td>
-                <td>{{ day.active ? 'Yes' : 'No' }}</td>
-                <td>{{ day.openAM ? day.openAM|date('H:i:s') : '' }}</td>
-                <td>{{ day.closeAM ? day.closeAM|date('H:i:s') : '' }}</td>
-                <td>{{ day.openPM ? day.openPM|date('H:i:s') : '' }}</td>
-                <td>{{ day.closePM ? day.closePM|date('H:i:s') : '' }}</td>
+                <td>{{ day.name}}</td>
+                <td>{{ day.active ? 'Oui' : 'Non' }}</td>
+                <td>{{ day.openAM ? day.openAM|date('H:i') : '' }}</td>
+                <td>{{ day.closeAM ? day.closeAM|date('H:i') : '' }}</td>
+                <td>{{ day.openPM ? day.openPM|date('H:i') : '' }}</td>
+                <td>{{ day.closePM ? day.closePM|date('H:i') : '' }}</td>
                 <td>
-                    {{ include('day/_delete_form.html.twig') }}
-                    <a href="{{ path('app_day_edit', {'id': day.id}) }}">edit</a>
+                    {# {{ include('day/_delete_form.html.twig') }} #}
+                    <a class="btn-modifier" href="{{ path('app_day_edit', {'id': day.id}) }}">MODIFIER</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_day_new') }}">Create new</a>
+    {# <a href="{{ path('app_day_new') }}">Create new</a> #}
 {% endblock %}

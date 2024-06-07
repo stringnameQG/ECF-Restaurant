@@ -4,44 +4,45 @@
     <script src="{{ asset('js/images.js') }}"></script>
 {% endblock javascripts %}
 
-{% block title %}PictureDishes index{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/PictureDishes/picture_dishes.css') }}">
+{% endblock %}
 
 {% block main %}
-    <h1>PictureDishes index</h1>
+    <h2>Image plat</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Name</th>
-                <th>Display</th>
-                <th>actions</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
+    <a class="btn-ajouter" href="{{ path('app_picture_dishes_new') }}">AJOUTER IMAGE</a>
+
         {% for picture_dish in picture_dishes %}
-            <tr>
-                <td>{{ picture_dish.id }}</td>
-                <td>{{ picture_dish.title }}</td>
-                <td>{{ picture_dish.name }}</td>
-                <td>{{ picture_dish.display ? 'Yes' : 'No'  }}</td>
-                <td>
-                    <a href="{{ path('app_picture_dishes_edit', {'id': picture_dish.id}) }}">edit</a>
-                </td>
-                <td>
-                    <a href="{{ path('app_picture_dishes_delete_image', {id: picture_dish.id}) }}" 
-                    data-delete data-token="{{ csrf_token('delete' ~ picture_dish.id) }}">Supprimer</a> 
-                </td>
-            </tr>
+        <article>
+            <div class="dishes-container">    
+                <div class="dishes">
+                  <img class="dishes-picture" title="{{ picture_dish.title }}" src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture_dish.name ~ ".webp" }} alt="Image" decoding="async">
+                  <div class="dishes-title">{{ picture_dish.title }}</div>
+                </div>
+            </div>
+            <p>Image affiché: {{ picture_dish.display ? 'Oui' : 'Non'  }}</p>
+            <div class="td-action">
+                <a class="btn-modifier" href="{{ path('app_picture_dishes_edit', {'id': picture_dish.id}) }}">MODIFIER</a>
+                <a class="btn-supprimer" href="{{ path('app_picture_dishes_delete_image', {id: picture_dish.id}) }}" 
+                data-delete data-token="{{ csrf_token('delete' ~ picture_dish.id) }}">SUPPRIMER</a> 
+            </div>
+        </article>
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+            <article>
+                <p>Aucune Image</p>
+            </article>
         {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_picture_dishes_new') }}">Create new</a>
+{% endblock %}
+{% block footer %}
+<footer class='pagination'>
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span class="page-courante">{{ page }}</span>
+        {% else %}
+            <a class="page-non-courante" href="{{ path('app_menu_index', {'page': page}) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</footer>
 {% endblock %}

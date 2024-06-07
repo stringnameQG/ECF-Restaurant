@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class PictureDishesType extends AbstractType
 {
@@ -30,16 +31,20 @@ class PictureDishesType extends AbstractType
                     'class' => 'input__pictures',
                     'accept' => 'image/*',
                 ],
-                'label' => 'Images',
+                'label' => 'Image',
                 'multiple' => false,
                 'mapped' => false,
                 'required' => false,
             ])
             ->add('dishes', EntityType::class, [
                 'class' => Dishes::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
+                'label' => 'Plat',
             ])
-            ->add('display')
+            ->add('display', CheckboxType::class, [
+                'label' => 'Afficher',
+                'required' => false,
+            ])
         ;
     }
 

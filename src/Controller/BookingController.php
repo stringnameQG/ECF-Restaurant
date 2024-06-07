@@ -14,17 +14,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Doctrine\Common\Collections\Criteria;
 
 #[Route('/booking')]
 class BookingController extends AbstractController
 {
-    #[Route('/', name: 'app_booking_index', methods: ['GET'])]
-    public function index(BookingRepository $bookingRepository): Response
+    #[Route('/{page<\d+>?1}', name: 'app_booking_index', methods: ['GET'])]
+    public function index(BookingRepository $bookingRepository, int $page): Response
     {
+        $bookingPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $bookingPerPage)
+            ->setMaxResults($bookingPerPage);
+
+        $booking = $bookingRepository->matching($criteria);
+
+        $totalBooking = count($bookingRepository->matching(Criteria::create()));
+        
+        $totalPages = ceil($totalBooking / $bookingPerPage);
         return $this->render('booking/index.html.twig', [
-            'bookings' => $bookingRepository->findAll(),
+            'bookings' => $booking,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

@@ -1,4 +1,28 @@
 {{ form_start(form) }}
+    <div class="div-active">
+        {{ form_label(form.active) }} 
+        {{ form_widget(form.active) }} 
+    </div>
+    <div>
+        {{ form_label(form.name) }} 
+        {{ form_widget(form.name) }} 
+    </div>
+    <div>
+        {{ form_label(form.openAM) }} 
+        {{ form_widget(form.openAM) }} 
+    </div>
+    <div>
+        {{ form_label(form.closeAM) }} 
+        {{ form_widget(form.closeAM) }} 
+    </div>
+    <div>
+        {{ form_label(form.openPM) }} 
+        {{ form_widget(form.openPM) }} 
+    </div>
+    <div>
+        {{ form_label(form.closePM) }} 
+        {{ form_widget(form.closePM) }} 
+    </div>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    <button class="btn-ajouter">{{ button_label|default('ENREGISTRER') }}</button>
 {{ form_end(form) }}
