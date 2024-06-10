@@ -2,13 +2,14 @@
     max-width: 1000px;
     max-height: 500px;
     width: 95vw;
-    height: 50vw;
+    height: fit-content;
     position: relative;
     margin: 0px;
 }
 .dishes {
     max-width: 100%;
     max-height: 100%;
+    width: 100%;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +30,7 @@
 }
 .dishes-title {
     color: #f2f2f2;
-    font-size: 15px;
+    font-size: 30px;
     padding: 2px 12px;
     position: absolute;
     bottom: 4px;
@@ -52,7 +53,4 @@
     text-decoration: none;
     background-color: rgb(255, 255, 255);
     color: rgb(232, 204, 50);
-}
-@media screen and (max-width: 1000px) {
-
 }

@@ -42,27 +42,35 @@ class PictureService
             };     
         }
 
-        function EnregistrementFichierImage($pictureSource, $path): void
-        {
-            imagewebp($pictureSource, $path);
+        function ModifyFormatImage($chemin, $path) {
+            $width = 1000;
+            $height = 500;
+
+            Header("Content-type: image/webp");
+            $img_new = imagecreatefromwebp($chemin);
+            $size = getimagesize($chemin);      
+            $img_mini = imagecreatetruecolor($width, $height);  var_dump($img_mini);
+            imagecopyresampled($img_mini,$img_new,0,0,0,0,$width,$height,$size[0],$size[1]);   
+            imagewebp($img_mini, $path);
         }
         
         function EnregistrementImageCloudinary($path, $fichierNom){
-
             $uploadFolder = 'RestaurantArnaudMichant';
-
             $upload = new UploadApi();
-
             $upload->upload($path, [
                 'public_id' => $fichierNom,
                 'folder' => $uploadFolder
             ]);
         }
 
-        VerificationFormatImage($pitctureInfos = getimagesize($picture));
+        VerificationFormatImage(getimagesize($picture));
 
-        EnregistrementImageCloudinary($path = $_FILES["picture_dishes"]["tmp_name"]["pictures"], $fichierNom = md5(uniqid(rand(), true)));
+        ModifyFormatImage(
+            $chemin = $_FILES["picture_dishes"]["tmp_name"]["pictures"], 
+            $path = $chemin . $fichierNom = md5(uniqid(rand(), true))
+        );
 
+        EnregistrementImageCloudinary($path, $fichierNom);
         return $fichierNom;
     }
 

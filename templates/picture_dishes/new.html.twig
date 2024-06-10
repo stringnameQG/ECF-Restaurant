@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/PictureDishes/verificationDimensioinImage.js') }}"></script>
+{% endblock javascripts %}
+
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/PictureDishes/picture_dishes.css') }}">
 <link rel="stylesheet" href="{{ asset('css/PictureDishes/picture_dishesForm.css') }}">
@@ -9,5 +13,4 @@
     <h2>Ajouter nouvelle image de plat</h2>
 
     {{ include('picture_dishes/_form.html.twig') }}
-    
 {% endblock %}
