@@ -30,6 +30,7 @@ div {
 }
 .title, .description, .price {
     max-width: fit-content;
+    text-align: start;
 }
 .price {
     width: fit-content;
