@@ -3,7 +3,7 @@
     src: url('../../Police/Latinia.ttf');
 }
 body {
-    background-color: rgb(30, 61, 61);
+    background-color: rgb(37, 74, 74);
     margin: 0px;
     font-family: Latinia;
     font-size: 28px;
@@ -18,14 +18,14 @@ header {
     color: rgb(255, 255, 255);
     margin: 0px;
     padding: 0px 8px;
-    height: 50px;
+    height: 70px;
     height: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 .quai-antique {
-    margin: 0px;
+    margin: auto 0px;
 }
 .cross-div {
     width: 50px;
@@ -55,7 +55,7 @@ header {
 nav {
     background-color: white;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 70px);
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -189,6 +189,9 @@ input {
 @media screen and (min-width: 1000px) {
     body {
         font-size: 20px;
+    }
+    header {
+        height: 50px;
     }
     main {
         max-width: 1000px;
