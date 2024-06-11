@@ -105,10 +105,11 @@ footer {
     margin: 2px;
 }
 .pagination {
+    margin-bottom: 14px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 18px;
+    gap: 40px;
 }
 .page-courante {
     color: #898989;
