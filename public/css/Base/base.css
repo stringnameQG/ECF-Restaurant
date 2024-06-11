@@ -129,7 +129,8 @@ h2 {
     font-size: 38px;
 }
 h3 {
-    margin: 2px;
+    width: 90%;
+    margin: 2px 0px;
     font-size: 34px;
     text-align: center;
 }
