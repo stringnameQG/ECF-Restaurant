@@ -2,7 +2,7 @@ h1 {
     margin: 6px;
 }
 form {
-    background-color: rgb(242, 242, 242);
+    width: 80%;
     padding: 10px 18px;
     border-radius: 5px;
     display: flex;
@@ -24,4 +24,11 @@ input {
 }
 #user_allergy {
     overflow: hidden;
+}
+
+@media screen and (min-width: 1000px) {
+    form {
+        width: 80vw;
+        max-width: 700px;
+    }
 }

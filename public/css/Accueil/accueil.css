@@ -54,3 +54,10 @@
     background-color: rgb(255, 255, 255);
     color: rgb(232, 204, 50);
 }
+.description-restaurant {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}

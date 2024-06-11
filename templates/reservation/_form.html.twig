@@ -19,9 +19,13 @@
     </div>
     <div>
         {{ form_label(form.Allergy) }} 
-        {{ form_widget(form.Allergy, { 'attr': {'size': allergy|length} }) }}
+        <select name="{{ field_name(form.Allergy) }}" multiple="multiple" size="{{ form.Allergy.vars.choices|length }}">
+        {% for label, value in field_choices(form.Allergy) %}
+            <option value="{{ value }}">{{ label }}</option> 
+        {% endfor %}
+        </select>
     </div>
-{% else %}
+    {% else %}
     <div>
         {{ form_label(form.numberOfGuests) }} 
         {{ form_widget(form.numberOfGuests, {'value' : currentUser.numberOfGuests}) }} 
@@ -30,7 +34,9 @@
         {{ form_label(form.name) }} 
         {{ form_widget(form.name, {'value' : currentUser.defaultName}) }} 
     </div>
-    <select name="{{ field_name(form.Allergy) }}" multiple="multiple">
+    <div>
+        {{ form_label(form.Allergy) }} 
+        <select name="{{ field_name(form.Allergy) }}" multiple="multiple" size="{{ form.Allergy.vars.choices|length }}">
         {% for label, value in field_choices(form.Allergy) %}
             {% set trouver = false %}
             {% for valueUser in currentUser.allergy %}
@@ -43,7 +49,8 @@
                 <option value="{{ value }}">{{ label }}</option>
             {% endif %}   
         {% endfor %}
-    </select>
+        </select>
+    </div>
 {% endif %}
-    <button class="btn-enregistrer">{{ button_label|default('RESERVER') }}</button>
+    <button class="btn-ajouter">{{ button_label|default('RESERVER') }}</button>
 {{ form_end(form) }}

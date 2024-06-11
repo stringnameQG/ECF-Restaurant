@@ -12,7 +12,7 @@ function showSlides() {
     slideIndex++;
     if (slideIndex > slides.length) {slideIndex = 1}   
     slides[slideIndex-1].style.display = "flex";  
-    setTimeout(showSlides, 2000);
+    setTimeout(showSlides, 4000);
 }
 
 });
