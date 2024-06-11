@@ -60,7 +60,7 @@ nav {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 28px;
+    gap: 14px;
     position: fixed;
     top: 70px;
     opacity: 0;

@@ -43,7 +43,7 @@ table {
     text-decoration: none;
 }
 .btn-supprimer, .btn-modifier, .btn-ajouter, button {
-    background-color: #3b3b3b;
+    background-color: #4d4d4d;
 }
 .btn-supprimer:hover, .btn-modifier:hover, .btn-ajouter:hover, button:hover {
     background-color: #000000;
