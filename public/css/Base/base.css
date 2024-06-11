@@ -62,7 +62,7 @@ nav {
     flex-wrap: wrap;
     gap: 28px;
     position: fixed;
-    top: 60px;
+    top: 70px;
     opacity: 0;
     z-index: 2;
 }
