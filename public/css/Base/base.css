@@ -19,7 +19,6 @@ header {
     margin: 0px;
     padding: 0px 8px;
     height: 70px;
-    height: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
