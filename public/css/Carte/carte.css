@@ -32,7 +32,8 @@ div {
     max-width: fit-content;
 }
 .price {
-    margin: 0px;
+    width: fit-content;
+    margin: 0px 2px;
     min-width: fit-content;
 }
 .formule {
