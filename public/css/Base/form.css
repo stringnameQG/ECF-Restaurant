@@ -60,3 +60,13 @@ table {
 .btn-ajouter:hover {
     background-color: #48dc23;
 }
+
+@media screen and (min-width: 1000px) {
+    .td-action {
+        gap: 30px;
+    }
+    .btn-supprimer, .btn-modifier, .btn-ajouter {
+        font-size: 20px;
+    }
+
+}

@@ -30,7 +30,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td>Aucun résultat</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -41,7 +41,7 @@
     {% for page in 1..totalPages %}
         {% if page == currentPage %}
             <span class="page-courante">{{ page }}</span>
-        {% else %}
+        {% elseif page != 0 %}
             <a class="page-non-courante" href="{{ path('app_dishes_index', {'page': page}) }}">{{ page }}</a>
         {% endif %}
     {% endfor %}

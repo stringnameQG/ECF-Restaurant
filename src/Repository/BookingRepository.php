@@ -16,6 +16,17 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
+    public function deleteBooking(string $date): array
+    {   
+        return $this->createQueryBuilder('b')
+            ->delete()
+            ->Where('b.date < :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult()
+        ;   
+    }
+
     public function findBookingIfFull(string $schedulesOpen, string $schedulesClose): array
     {
         return $this->createQueryBuilder('b')

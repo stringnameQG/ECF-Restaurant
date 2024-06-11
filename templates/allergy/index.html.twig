@@ -34,7 +34,7 @@
     {% for page in 1..totalPages %}
         {% if page == currentPage %}
             <span class="page-courante">{{ page }}</span>
-        {% else %}
+        {% elseif page != 0 %}
             <a class="page-non-courante" href="{{ path('app_allergy_index', {'page': page}) }}">{{ page }}</a>
         {% endif %}
     {% endfor %}

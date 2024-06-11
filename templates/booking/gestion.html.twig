@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block main %}
-    <h2>Reservation</h2>
+{% block javascripts %}
+    <script src="{{ asset('js/GestionBooking/RequeteDeleteBooking.js') }}"></script>
+{% endblock %}
 
-    <a class="btn-ajouter" href="{{ path('app_booking_gestion') }}">GESTION</a>
+{% block main %}
+    <h2>Gestion</h2>
+
+    <a class="btn-ajouter" href="{{ path('app_booking_index') }}">RESERVATION</a>
+    <p>Supprimer toute les reservations jusqua la date renseigné</p>
+    <form>
+        <input class="date-delete" type="date"></input>
+    </form>
+    <button class="btn-delete">{{ button_label|default('SUPPRIMER') }}</button>
     <table class="table">
         <thead>
             <tr>

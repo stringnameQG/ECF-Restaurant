@@ -21,16 +21,21 @@ class BookingController extends AbstractController
 {
     #[Route('/{page<\d+>?1}', name: 'app_booking_index', methods: ['GET'])]
     public function index(BookingRepository $bookingRepository, int $page): Response
-    {
+    {   
+        date_default_timezone_set('Europe/Paris');  
+        $actualDate = date("Y-m-d");    
+        $dateStart = date($actualDate) . " " . date('H:i',strtotime('00:00'));
+        $dateEnd = date($actualDate) . " " . date('H:i',strtotime('23:59'));    
         $bookingPerPage = 20;
         
         $criteria = Criteria::create()
             ->setFirstResult(($page - 1) * $bookingPerPage)
+            ->where(Criteria::expr()->in('date', [$dateStart, $dateEnd]))
             ->setMaxResults($bookingPerPage);
 
         $booking = $bookingRepository->matching($criteria);
 
-        $totalBooking = count($bookingRepository->matching(Criteria::create()));
+        $totalBooking = count($bookingRepository->matching($criteria));
         
         $totalPages = ceil($totalBooking / $bookingPerPage);
         return $this->render('booking/index.html.twig', [
@@ -107,5 +112,33 @@ class BookingController extends AbstractController
         }
 
         return $this->redirectToRoute('app_booking_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/gestion/{page<\d+>?1}', name: 'app_booking_gestion', methods: ['GET'])]
+    public function gestion(BookingRepository $bookingRepository, int $page): Response
+    {   
+        $bookingPerPage = 20;
+        
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $bookingPerPage)
+            ->setMaxResults($bookingPerPage);
+
+        $booking = $bookingRepository->matching($criteria);
+
+        $totalBooking = count($bookingRepository->matching(Criteria::create()));
+        
+        $totalPages = ceil($totalBooking / $bookingPerPage);
+        return $this->render('booking/gestion.html.twig', [
+            'bookings' => $booking,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+        ]);
+    }
+
+    #[Route('/DeleteDay')]
+    public function RequeteDQLDeleteDay(BookingRepository $bookingRepository)
+    {
+        $date = $_GET['date'];
+        $bookingRepository->deleteBooking($date);
     }
 }
