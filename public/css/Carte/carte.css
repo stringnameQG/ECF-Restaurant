@@ -36,6 +36,9 @@ div {
     margin: 0px 2px;
     min-width: fit-content;
 }
+.description {
+    text-align: start;
+}
 .formule {
     display: flex;
     flex-direction: column;
