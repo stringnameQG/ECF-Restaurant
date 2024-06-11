@@ -24,14 +24,14 @@ textarea {
     height: 30px;
 }
 table {
-    border-spacing: 10px;
+    border-spacing: 30px;
 }
 .td-action {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 22px;
 }
 .btn-supprimer, .btn-modifier, .btn-ajouter, button {
     padding: 2px 6px;
