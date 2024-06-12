@@ -110,6 +110,7 @@ footer {
     align-items: center;
 }
 .horaire-ouverture__jour {
+    width: 100%;
     margin: 2px;
     font-size: 1.6em;
 }
