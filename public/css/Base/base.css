@@ -6,7 +6,7 @@ body {
     background-color: rgb(37, 74, 74);
     margin: 0px;
     font-family: Latinia;
-    font-size: 28px;
+    font-size: 1em;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -105,6 +105,20 @@ footer {
 .horaire-ouverture__jour {
     margin: 2px;
 }
+.cgv-mentionlegale {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+.cgv {
+    text-decoration: none;
+    color: #ffffff;
+}
+.mentionlegale {
+    text-decoration: none;
+    color: #ffffff;
+}
 .pagination {
     margin-bottom: 14px;
     display: flex;
@@ -124,23 +138,19 @@ footer {
     color: #626262;
 }
 h1 {
-    font-size: 52px;
     font-size: 1.8em;
 }
 h2 {
     margin: 4px;
-    font-size: 42px;
     font-size: 1.6em;
 }
 h3 {
     width: 90%;
     margin: 2px 0px;
-    font-size: 38px;
     font-size: 1.4em;
     text-align: center;
 }
 p {
-    font-size: 30px;
     font-size: 1em;
     margin: 2px;
     text-align: center;
@@ -155,24 +165,20 @@ ul {
     text-align: center;
 }
 button {
-    font-size: 30px;
     font-size: 1em;
 }
 select {
-    font-size: 30px;
     font-size: 1em;
 }
 label {
-    font-size: 34px;
     font-size: 1.2em;
 }
 input {
     width: 100%;
-    font-size: 30px;
     font-size: 1em;
 }
 .nav-list__item {
-    font-size: 50px;
+    font-size: 1.8em;
 }
 .div-active {
     display: flex;
@@ -194,24 +200,9 @@ input {
     flex: 1;
     margin: 0 .5em;
 }
-.cgv-mentionlegale {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-}
-.cgv {
-    text-decoration: none;
-    color: #ffffff;
-}
-.mentionlegale {
-    text-decoration: none;
-    color: #ffffff;
-}
 
 @media screen and (min-width: 1000px) {
     body {
-        font-size: 20px;
         font-size: 1em;
     }
     header {
@@ -247,46 +238,36 @@ input {
         gap: 20px;
     }
     h1 {
-        font-size: 32px;
         font-size: 1.8em;
     }
     h2 {
         margin: 4px;
-        font-size: 26px;
         font-size: 1.6em;
     }
     h3 {
         margin: 2px;
-        font-size: 22px;
         font-size: 1.4em;
     }
     p {
-        font-size: 18px;
         font-size: 1em;
         margin: 2px;
     }
     button {
-        font-size: 18px;
         font-size: 1em;
     }
     select {
-        font-size: 18px;
         font-size: 1em;
     }
     label {
-        font-size: 22px;
         font-size: 1.4em;
     }
     input {
-        font-size: 18px;
         font-size: 1em;
     }
     .nav-list__item {
-        font-size: 30px;
         font-size: 1.8em;
     }
     .btn-supprimer, .btn-modifier, .btn-ajouter {
-        font-size: 18px;
         font-size: 1em;
     }
 }
