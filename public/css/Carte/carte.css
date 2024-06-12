@@ -1,6 +1,7 @@
 main {
     max-width: 1000px;
     margin: 6px;
+    margin-top: 80px;
     padding: 6px;
     border: solid 2px rgb(255, 255, 255);
     border-radius: 20px;
