@@ -29,14 +29,15 @@
     border-radius: 5px;
 }
 .dishes-title {
-    color: #f2f2f2;
+    background-color: black;
+    color: #ffffff;
     font-size: 34px;
     font-size: 1.2em;
     padding: 2px 12px;
     position: absolute;
     bottom: 4px;
-    width: 100%;
     text-align: center;
+    border-radius: 4px;
 }
 .active {
     background-color: #717171;
