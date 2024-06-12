@@ -92,8 +92,9 @@ footer {
     height: fit-content;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    gap: 6px;
 }
 .horaire {
     margin-bottom: 10px;
@@ -122,22 +123,25 @@ footer {
 .page-non-courante:hover {
     color: #626262;
 }
-
 h1 {
     font-size: 52px;
+    font-size: 1.8em;
 }
 h2 {
     margin: 4px;
     font-size: 42px;
+    font-size: 1.6em;
 }
 h3 {
     width: 90%;
     margin: 2px 0px;
     font-size: 38px;
+    font-size: 1.4em;
     text-align: center;
 }
 p {
     font-size: 30px;
+    font-size: 1em;
     margin: 2px;
     text-align: center;
 }
@@ -152,16 +156,20 @@ ul {
 }
 button {
     font-size: 30px;
+    font-size: 1em;
 }
 select {
     font-size: 30px;
+    font-size: 1em;
 }
 label {
     font-size: 34px;
+    font-size: 1.2em;
 }
 input {
     width: 100%;
     font-size: 30px;
+    font-size: 1em;
 }
 .nav-list__item {
     font-size: 50px;
@@ -186,10 +194,25 @@ input {
     flex: 1;
     margin: 0 .5em;
 }
+.cgv-mentionlegale {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+.cgv {
+    text-decoration: none;
+    color: #ffffff;
+}
+.mentionlegale {
+    text-decoration: none;
+    color: #ffffff;
+}
 
 @media screen and (min-width: 1000px) {
     body {
         font-size: 20px;
+        font-size: 1em;
     }
     header {
         height: 50px;
@@ -225,35 +248,45 @@ input {
     }
     h1 {
         font-size: 32px;
+        font-size: 1.8em;
     }
     h2 {
         margin: 4px;
         font-size: 26px;
+        font-size: 1.6em;
     }
     h3 {
         margin: 2px;
         font-size: 22px;
+        font-size: 1.4em;
     }
     p {
         font-size: 18px;
+        font-size: 1em;
         margin: 2px;
     }
     button {
         font-size: 18px;
+        font-size: 1em;
     }
     select {
         font-size: 18px;
+        font-size: 1em;
     }
     label {
         font-size: 22px;
+        font-size: 1.4em;
     }
     input {
         font-size: 18px;
+        font-size: 1em;
     }
     .nav-list__item {
         font-size: 30px;
+        font-size: 1.8em;
     }
     .btn-supprimer, .btn-modifier, .btn-ajouter {
         font-size: 18px;
+        font-size: 1em;
     }
 }

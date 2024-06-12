@@ -1,0 +1,42 @@
+main {
+    text-align: start;
+}
+.mentionslegale {
+    padding-left: 4px; padding-right: 4px;
+}
+h2 {
+    margin-top: 10px; margin-bottom: 8px;
+    font-size: 30px;
+    font-size: 1.8em;
+    text-align: center;
+}
+h3 {
+    margin: 10px 0px 4px 0px;
+    text-align: start;
+}
+p {
+    margin-top: 4px; margin-bottom: 4px;
+    font-size: 14px;
+    font-size: 1em;
+    text-align: start;
+}
+.horaire>h3 {
+    text-align: center;
+    font-size: 38px;
+    font-size: 2em;
+}
+
+@media screen and (min-width: 1000px) {
+    h2 {
+        font-size: 26px;
+        font-size: 1.4em;
+    }
+    h3 {
+        font-size: 22px;
+        font-size: 1.2em;
+    }
+    p {
+        font-size: 18px;
+        font-size: 1em;
+    }
+}

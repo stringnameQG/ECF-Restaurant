@@ -16,7 +16,11 @@
                 <p class="title">{{ product.title }}</p>
                 <p class="description">{{ product.description }}</p>
             </div>
+            {% if product.price|length < 4 %} 
             <p class="price" itemprop="price">{{ product.price }} €</p>
+            {% else %}
+            <p class="price" itemprop="price">{{ product.price|number_format(2) }} €</p>
+            {% endif %}
             <meta itemprop="priceCurrency" content="EURO" />
         </div>
     {% endfor %}
@@ -31,7 +35,11 @@
         <p>{{ product.name }}</p>
         <p>{{ product.description }}</p>
         <p>{{ product.dayAccuracy }}</p>
-        <p itemprop="price">{{ product.price }} €</p>
+        {% if product.price|length < 4 %} 
+        <p itemprop="price">{{ product.price }} €</p> 
+        {% else %}
+        <p itemprop="price">{{ product.price|number_format(2) }} €</p>
+        {% endif %}
         <meta itemprop="priceCurrency" content="EURO" />
     </div>
 {% endfor %}

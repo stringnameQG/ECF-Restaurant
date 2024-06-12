@@ -30,7 +30,8 @@
 }
 .dishes-title {
     color: #f2f2f2;
-    font-size: 30px;
+    font-size: 34px;
+    font-size: 1.2em;
     padding: 2px 12px;
     position: absolute;
     bottom: 4px;
