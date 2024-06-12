@@ -113,6 +113,7 @@ footer {
     margin: 2px;
 }
 .cgv-mentionlegale {
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -154,7 +155,7 @@ h3 {
     text-align: center;
 }
 p {
-    font-size: 1em;
+    font-size: 1.2em;
     margin: 2px;
     text-align: center;
 }
