@@ -111,6 +111,7 @@ footer {
 }
 .horaire-ouverture__jour {
     margin: 2px;
+    font-size: 1.8em;
 }
 .cgv-mentionlegale {
     margin-bottom: 10px;
@@ -122,6 +123,7 @@ footer {
 .cgv, .mentionlegale {
     text-decoration: none;
     color: #ffffff;
+    font-size: 1.8em;
 }
 .pagination {
     margin-bottom: 14px;
