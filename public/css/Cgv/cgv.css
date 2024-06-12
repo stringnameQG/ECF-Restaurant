@@ -18,7 +18,7 @@ p {
 }
 .horaire>h3 {
     text-align: center;
-    font-size: 1.4em;
+    font-size: 2em;
 }
 
 @media screen and (min-width: 1000px) {
