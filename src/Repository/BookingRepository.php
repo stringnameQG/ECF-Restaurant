@@ -27,7 +27,9 @@ class BookingRepository extends ServiceEntityRepository
         ;   
     }
 
-    public function findBookingIfFull(string $schedulesOpen, string $schedulesClose): array
+    public function findBookingIfFull(
+        string $schedulesOpen, string $schedulesClose
+    ): array
     {
         return $this->createQueryBuilder('b')
             ->select('SUM(b.numberOfGuests)')

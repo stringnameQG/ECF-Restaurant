@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://* 'self'; ">
     <title>{% block title %}QuaiAntique{% endblock %}</title>
     <link rel="icon" href="{{ asset('icon/restaurant.svg') }}">
     <link rel="stylesheet" href="{{ asset('css/Base/base.css') }}">
@@ -26,24 +27,24 @@
         <a class="nav-list__item" href="{{ path('app_carte') }}">CARTE</a>
         <a class="nav-list__item" href="{{ path('app_reservation') }}">RESERVATION</a>
         {% if is_granted('ROLE_ADMIN') %} 
-        <a class="nav-list__item" href="{{ path('app_allergy_index') }}">ALLERGIE</a>
-        <a class="nav-list__item" href="{{ path('app_booking_index') }}">BOOKING</a>
-        <a class="nav-list__item" href="{{ path('app_day_index') }}">DAY</a>
-        <a class="nav-list__item" href="{{ path('app_menu_index') }}">MENU</a>
-        <a class="nav-list__item" href="{{ path('app_category_index') }}">CATEGORIE</a>
-        <a class="nav-list__item" href="{{ path('app_dishes_index') }}">PLAT</a>
-        <a class="nav-list__item" href="{{ path('app_picture_dishes_index') }}">IMAGE PLAT</a>
-        <a class="nav-list__item" href="{{ path('app_formula_index') }}">FORMULE</a>
-        <a class="nav-list__item" href="{{ path('app_number_of_place_index') }}">NOMBRE DE PLACE</a>
-        <a class="nav-list__item" href="{{ path('app_user_index') }}">UTILISATEUR</a>
-        <a class="nav-list__item" href="{{ path('app_logout') }}">DECONNEXION</a>
-        <a class="nav-list__item" href="{{ path('app_user_mon_compte') }}">MON COMPTE</a> 
+            <a class="nav-list__item" href="{{ path('app_allergy_index') }}">ALLERGIE</a>
+            <a class="nav-list__item" href="{{ path('app_booking_index') }}">BOOKING</a>
+            <a class="nav-list__item" href="{{ path('app_day_index') }}">DAY</a>
+            <a class="nav-list__item" href="{{ path('app_menu_index') }}">MENU</a>
+            <a class="nav-list__item" href="{{ path('app_category_index') }}">CATEGORIE</a>
+            <a class="nav-list__item" href="{{ path('app_dishes_index') }}">PLAT</a>
+            <a class="nav-list__item" href="{{ path('app_picture_dishes_index') }}">IMAGE PLAT</a>
+            <a class="nav-list__item" href="{{ path('app_formula_index') }}">FORMULE</a>
+            <a class="nav-list__item" href="{{ path('app_number_of_place_index') }}">NOMBRE DE PLACE</a>
+            <a class="nav-list__item" href="{{ path('app_user_index') }}">UTILISATEUR</a>
+            <a class="nav-list__item" href="{{ path('app_logout') }}">DECONNEXION</a>
+            <a class="nav-list__item" href="{{ path('app_user_mon_compte') }}">MON COMPTE</a> 
         {% elseif is_granted('ROLE_USER') %}
-        <a class="nav-list__item" href="{{ path('app_user_mon_compte') }}">MON COMPTE</a> 
-        <a class="nav-list__item" href="{{ path('app_logout') }}">DECONNEXION</a>
+            <a class="nav-list__item" href="{{ path('app_user_mon_compte') }}">MON COMPTE</a> 
+            <a class="nav-list__item" href="{{ path('app_logout') }}">DECONNEXION</a>
         {% else %}
-        <a class="nav-list__item" href="{{ path('app_login') }}">CONNEXION</a>     
-        <a class="nav-list__item" href="{{ path('app_register') }}">S'INSCRIRE</a>  
+            <a class="nav-list__item" href="{{ path('app_login') }}">CONNEXION</a>     
+            <a class="nav-list__item" href="{{ path('app_register') }}">S'INSCRIRE</a>  
         {% endif %} 
     </nav>
     <main>
@@ -89,6 +90,5 @@
     {% endif %}
 
     {% block footer %}{% endblock %}
-
 </body>
 </html>

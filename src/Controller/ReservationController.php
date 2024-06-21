@@ -105,9 +105,9 @@ class ReservationController extends AbstractController
             } while(mktime($hoursOpenPM, $minuteOpenPM + ($PmCoef * $coeficientAugmentiation), 0, 0, 0, 0) < mktime($hoursClosePM-1, $minuteClosePM, 0, 0, 0, 0));
             array_push($testArrayPM, $hoursAdd->format("H:i"));
 
-
             $inArray = false;
             $amOrpm = "AM";
+            
             if(in_array($form->get('hours')->getData(), $testArrayAM)){
                 $inArray = true;
                 $amOrpm = "AM";
