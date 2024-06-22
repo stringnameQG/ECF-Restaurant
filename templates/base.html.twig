@@ -26,6 +26,7 @@
         <a class="nav-list__item" href="{{ path('app_accueil') }}">ACCUEIL</a>
         <a class="nav-list__item" href="{{ path('app_carte') }}">CARTE</a>
         <a class="nav-list__item" href="{{ path('app_reservation') }}">RESERVATION</a>
+            <a class="nav-list__item" href="{{ path('app_user_index') }}">UTILISATEUR</a>
         {% if is_granted('ROLE_ADMIN') %} 
             <a class="nav-list__item" href="{{ path('app_allergy_index') }}">ALLERGIE</a>
             <a class="nav-list__item" href="{{ path('app_booking_index') }}">BOOKING</a>
