@@ -18,14 +18,8 @@ class Booking
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\Type(type: 'integer', message: 'Type attendue invalide')]
     #[Assert\PositiveOrZero(message: 'Le nombre de personne ne peut pas être vide ou inférieur à zéro')]
-    /*
-    #[Assert\Range(
-        min: 1,
-        max: 20,
-        minMessage: 'Impossible de faire une réservation avec moin d\'une personne',
-        maxMessage: 'Impossible de faire une réservation avec plus de 20 personnes',
-    )]  */
     private ?int $numberOfGuests = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -33,6 +27,7 @@ class Booking
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Type(type: 'string', message: 'Type attendue invalide')]
     #[Assert\NotBlank(message: 'Le nom de réservation ne peut pas être vide')]
     #[Assert\Length(
         max: 100,

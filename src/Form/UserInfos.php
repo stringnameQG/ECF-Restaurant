@@ -18,24 +18,7 @@ class UserInfos extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder/*
-            ->add('email', EmailType::class, [
-                'attr' => [
-                    'class' => 'input__email',
-                    'maxlength' => '180'
-                ],
-                'required' => true,
-                'label' => 'Email'
-            ])
-            ->add('password', PasswordType::class, [
-                'attr' => [
-                    'class' => 'input__password'
-                ],
-                'required' => true,
-                'label' => 'Mot de passe'
-            ])*/
-
-
+        $builder
             ->add('numberOfGuests', IntegerType::class, [
                 'attr' => [
                     'class' => 'input__numberOfGuests',

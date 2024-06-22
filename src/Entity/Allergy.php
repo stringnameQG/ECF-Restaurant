@@ -17,6 +17,7 @@ class Allergy
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Type(type: 'string', message: 'Type attendue invalide')]
     #[Assert\NotBlank(message: 'Le nom de l\'allergie ne peut pas être vide')]
     #[Assert\Length(
         max: 50,

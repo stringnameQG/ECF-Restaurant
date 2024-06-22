@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserInfos;
 use App\Service\Mailer;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -83,11 +84,11 @@ class UserController extends AbstractController
     ): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserInfos::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() && $form->isValid()) { 
+            
             $entityManager->persist($user);
             $entityManager->flush();
 
