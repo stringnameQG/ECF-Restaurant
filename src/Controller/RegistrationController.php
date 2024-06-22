@@ -32,7 +32,7 @@ class RegistrationController extends AbstractController
     ): Response
     {
         $user = new User();
-        $user->setRoles(['ROLE_ADMIN']);
+        $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
