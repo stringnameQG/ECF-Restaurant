@@ -55,7 +55,7 @@ security:
         - { path: ^/picture/dishes, roles: ROLE_ADMIN }
         - { path: ^/formula, roles: ROLE_ADMIN }
         - { path: ^/number/of/place, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: PUBLIC_ACCESS }
     role_hierarchy:
        ROLE_ADMIN:       ROLE_USER
 
