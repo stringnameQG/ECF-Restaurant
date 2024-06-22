@@ -63,7 +63,7 @@ nav {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 22px;
     position: fixed;
     top: 70px;
     opacity: 0;
@@ -182,14 +182,14 @@ select {
     font-size: 2.6em;
 }
 label {
-    font-size: 1.6em;
+    font-size: 3em;
 }
 input {
     width: 100%;
     font-size: 2.6em;
 }
 .nav-list__item {
-    font-size: 1.8em;
+    font-size: 2.2em;
 }
 .div-active {
     display: flex;
@@ -281,7 +281,7 @@ input {
         font-size: 1.1em;
     }
     label {
-        font-size: 1.8em;
+        font-size: 1.6em;
     }
     input {
         font-size: 1.1em;
