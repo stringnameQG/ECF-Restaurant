@@ -247,7 +247,7 @@ input {
         top: 50px;
         opacity: 0;
         z-index: 2;
-        gap: 20px;
+        gap: 10px;
     }
     .cgv-mentionlegale {
         display: flex;
