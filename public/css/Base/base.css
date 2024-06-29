@@ -213,16 +213,16 @@ input {
 }
 
 @media screen and (min-width: 1000px) {
+    main {
+        margin-top: 60px;
+        max-width: 1000px;
+        align-self: center;
+    }
     body {
         font-size: 1em;
     }
     header {
         height: 50px;
-    }
-    main {
-        margin-top: 60px;
-        max-width: 1000px;
-        align-self: center;
     }
     .cross-div {
         width: 40px;

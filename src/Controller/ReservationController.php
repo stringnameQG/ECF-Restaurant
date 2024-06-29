@@ -24,14 +24,12 @@ class ReservationController extends AbstractController
         Mailer $mailer,
         DayRepository $dayRepository, 
         NumberOfPlaceRepository $numberOfPlaceRepository,
-        BookingRepository $bookingRepository,
-        AllergyRepository $allergyRepository
+        BookingRepository $bookingRepository
     ): Response
     {
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             
@@ -157,11 +155,8 @@ class ReservationController extends AbstractController
         $user = $this->getUser();
         
         return $this->render('reservation/index.html.twig', [
-            'booking' => $booking,
             'form' => $form,
             'currentUser' => $user,
-            'listDay' => $dayRepository->findAll(),
-            'allergy' => $allergyRepository->findAll(),
         ]);
     }
 

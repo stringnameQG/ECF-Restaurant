@@ -19,7 +19,7 @@ p {
     font-size: 1.6em;
     text-align: start;
 }
-.horaire>h3 {
+.horaire>h3, .horaire-ouverture__jour {
     text-align: center;
     font-size: 2em;
 }
