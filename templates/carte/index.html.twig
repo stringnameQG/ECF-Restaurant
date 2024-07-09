@@ -13,8 +13,8 @@
     {% for product in categorie.dishes %}
         <div class="dishes">
             <div class="dishes__title-description">
-                <p class="title">{{ product.title }}</p>
-                <p class="description">{{ product.description }}</p>
+                <p itemprop="name" class="title">{{ product.title }}</p>
+                <p itemprop="description" class="description">{{ product.description }}</p>
             </div>
             <p class="price" itemprop="price">{{ product.price|number_format(2) }} €</p>
             <meta itemprop="priceCurrency" content="EURO" />
@@ -28,8 +28,8 @@
 <h3>Formule</h3>
 {% for product in formula %}
     <div class="formule">
-        <p>{{ product.name }}</p>
-        <p>{{ product.description }}</p>
+        <p itemprop="name">{{ product.name }}</p>
+        <p itemprop="description">{{ product.description }}</p>
         <p>{{ product.dayAccuracy }}</p>
         <p itemprop="price">{{ product.price|number_format(2) }} €</p>
         <meta itemprop="priceCurrency" content="EURO" />
