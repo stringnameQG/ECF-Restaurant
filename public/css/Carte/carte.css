@@ -1,8 +1,8 @@
 main {
     max-width: 1000px;
-    margin: 6px;
-    margin-top: 80px;
-    padding: 6px;
+    margin: 2%;
+    margin-top: 5.5vh;
+    padding: 0% 1%;
     border: solid 2px rgb(255, 255, 255);
     border-radius: 20px;
     color: white;
@@ -20,13 +20,13 @@ div {
     width: 100%;
 }
 .dishes {
-    margin: 0px;
+    margin: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 .dishes__title-description {
-    margin: 0px;
+    margin: 0; 
 }
 .title, .description, .price {
     max-width: fit-content;
@@ -34,7 +34,7 @@ div {
 }
 .price {
     width: fit-content;
-    margin: 0px 2px;
+    margin: 0 1%;
     min-width: fit-content;
 }
 .description {
@@ -45,4 +45,10 @@ div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (min-width: 1000px) {
+    main {
+        margin-top: 6.5vh;
+    }
 }

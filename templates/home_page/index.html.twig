@@ -14,13 +14,12 @@
         <div class="dishes">
           <img class="dishes-picture" title="{{ picture.title }}" 
           src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture.name ~ ".webp" }} 
-          alt="Image" decoding="async">
+          alt="{{ picture.title }}" decoding="async">
           <div class="dishes-title">{{ picture.title }}</div>
         </div>
     {% endfor %}
     </div>
     <a class="reserver" href="{{ path('app_reservation') }}">RESERVER</a>
-    <hr>
     <div class="description-restaurant">
         <p>Découvrez une expérience culinaire inoubliable</p>
         <p>Situé au cœur de Chambéry, le Quai Antique vous invite à un voyage gastronomique unique. Notre établissement allie tradition et créativité pour vous offrir des plats savoureux, élaborés avec des produits frais et locaux.</p>

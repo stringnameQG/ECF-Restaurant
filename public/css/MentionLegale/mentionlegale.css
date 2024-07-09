@@ -1,37 +1,40 @@
 main {
     text-align: start;
+    font-size: 1em;
 }
 .mentionslegale {
-    padding-left: 4px; padding-right: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
 }
 h2 {
-    margin-top: 10px; margin-bottom: 8px;
-    font-size: 2em;
+    margin: 0;
+    font-size: 1.8em;
     text-align: center;
 }
 h3 {
-    margin: 10px 0px 4px 0px;
+    margin: 0;
     text-align: start;
-    font-size: 1.8em;
+    font-size: 1.4em;
 }
 p {
-    margin-top: 4px; margin-bottom: 4px;
-    font-size: 1.6em;
+    font-size: 1em;
     text-align: start;
 }
 .horaire>h3, .horaire-ouverture__jour {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.4em;
 }
 
 @media screen and (min-width: 1000px) {
     h2 {
-        font-size: 1.6em;
-    }
-    h3 {
         font-size: 1.4em;
     }
-    p {
+    h3 {
         font-size: 1.2em;
+    }
+    p {
+        font-size: 1em;
     }
 }
