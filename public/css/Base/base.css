@@ -179,15 +179,18 @@ ul {
 button {
     font-size: 1em;
 }
-select {
-    font-size: 1.6em;
-}
 label {
     font-size: 1.8em;
 }
 input {
     width: 100%;
     font-size: 1.6em;
+}
+select {
+    font-size: 1.6em;
+}
+figure {
+    margin: 0;
 }
 .nav-list__item {
     font-size: 2.2em;

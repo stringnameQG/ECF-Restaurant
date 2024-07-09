@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block main %}
-    <div class="slide-container">
+    <aside class="slide-container">
     {% for picture in pictureDishes %}
-        <div class="dishes">
+        <figure class="dishes">
           <img class="dishes-picture" title="{{ picture.title }}" 
           src={{ "https://res.cloudinary.com/hqzz8nqsu/image/upload/v1716918374/RestaurantArnaudMichant/" ~ picture.name ~ ".webp" }} 
           alt="{{ picture.title }}" decoding="async">
-          <div class="dishes-title">{{ picture.title }}</div>
-        </div>
+          <figcaption class="dishes-title">{{ picture.title }}</figcaption>
+        </figure>
     {% endfor %}
-    </div>
+    </aside>
     <a class="reserver" href="{{ path('app_reservation') }}">RESERVER</a>
     <div class="description-restaurant">
         <p>Découvrez une expérience culinaire inoubliable</p>
