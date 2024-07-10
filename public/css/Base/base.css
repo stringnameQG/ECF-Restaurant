@@ -121,9 +121,10 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10vw;
+    gap: 10%;
 }
 .cgv, .mentionlegale {
+    width: fit-content;
     text-decoration: none;
     color: #ffffff;
     font-size: 1.6em;
